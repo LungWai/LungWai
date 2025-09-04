@@ -12,10 +12,12 @@ from flask import Flask, render_template_string, request, redirect, flash, abort
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "projects.json"
 TMP_DATA = Path("/tmp/projects.json")
+# Remote path to commit in GitHub repo
+TARGET_REMOTE_PATH = "LungWai/projects.json"
 
 PASSWORD = os.getenv("EDITOR_PASSWORD", "")
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "")
-GITHUB_REPO = os.getenv("GITHUB_REPO", "")  # e.g. "LungWai/github-quick-tools"
+GITHUB_REPO = os.getenv("GITHUB_REPO", "")  # e.g. "LungWai/LungWai"
 GITHUB_BRANCH = os.getenv("GITHUB_BRANCH", "main")
 
 app = Flask(__name__)
@@ -27,30 +29,44 @@ TEMPLATE = """
 <style>
   body { font-family: system-ui, sans-serif; margin: 24px; }
   h1 { margin-bottom: 8px; }
+  .status { padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; background: #f9fafb; margin: 16px 0; font-size: 14px; }
+  .status b { font-weight: 600; }
+  .grid { margin: 16px 0; }
   .section { margin: 24px 0; }
-  table { border-collapse: collapse; width: 100%; }
-  th, td { border: 1px solid #ddd; padding: 8px; vertical-align: top; }
-  th { background: #f6f8fa; text-align: left; }
-  input[type=text] { width: 100%; box-sizing: border-box; padding: 6px; }
-  select { width: 100%; box-sizing: border-box; padding: 6px; }
-  textarea { width: 100%; box-sizing: border-box; padding: 6px; height: 60px; }
-  .actions { margin-top: 16px; display: flex; gap: 8px; }
+  table { border-collapse: collapse; width: 100%; table-layout: fixed; overflow: hidden; border-radius: 8px; }
+  thead th { position: sticky; top: 0; background: #f6f8fa; z-index: 1; }
+  th, td { border: 1px solid #e5e7eb; padding: 8px; vertical-align: top; }
+  th { text-align: left; font-weight: 600; color: #111827; }
+  tbody tr:nth-child(odd) { background: #fcfcfd; }
+  input[type=text], textarea, select { width: 100%; box-sizing: border-box; padding: 6px; border: 1px solid #d1d5db; border-radius: 6px; background: #fff; }
+  textarea { height: 60px; resize: vertical; }
+  .actions { margin-top: 16px; display: flex; gap: 12px; align-items: center; }
+  .btn { appearance: none; border: 0; background: #111827; color: #fff; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+  .btn:hover { background: #0b1220; }
+  .muted { color: #4b5563; font-size: 14px; }
+  .row-rem { text-align: center; }
 </style>
 <h1>Projects Editor</h1>
+<div class="status">
+  <div><b>GitHub Repo</b>: {{ gh.repo or 'not set' }}  <b>Branch</b>: {{ gh.branch }}</div>
+  <div><b>Token</b>: {{ 'present' if gh.token_present else 'missing' }}  ·  <b>Target Path</b>: {{ gh.path }}</div>
+  <div><b>Status</b>: {{ gh.status }}{% if gh.message %} — {{ gh.message }}{% endif %}</div>
+</div>
 <form method="post" action="/api/editor">
   <p><label>Password: <input type="password" name="password" required></label></p>
+  <div class="grid">
   {% for key, rows in data.items() %}
     <div class="section">
       <h2>{{ key }}</h2>
       <table>
         <thead>
           <tr>
-            <th>name</th>
-            <th>repo</th>
-            <th>visibility</th>
-            <th>deploy</th>
+            <th style="width: 16%">name</th>
+            <th style="width: 20%">repo</th>
+            <th style="width: 12%">visibility</th>
+            <th style="width: 16%">deploy</th>
             <th>desc</th>
-            <th>remove</th>
+            <th style="width: 8%">remove</th>
           </tr>
         </thead>
         <tbody>
@@ -66,7 +82,7 @@ TEMPLATE = """
             </td>
             <td><input name="{{ key }}[{{ loop.index0 }}][deploy]" value="{{ row.get('deploy','') }}"></td>
             <td><textarea name="{{ key }}[{{ loop.index0 }}][desc]">{{ row.get('desc','') }}</textarea></td>
-            <td><input type="checkbox" name="{{ key }}[{{ loop.index0 }}][_remove]"></td>
+            <td class="row-rem"><input type="checkbox" name="{{ key }}[{{ loop.index0 }}][_remove]"></td>
           </tr>
           {% endfor %}
           <tr>
@@ -86,8 +102,11 @@ TEMPLATE = """
       </table>
     </div>
   {% endfor %}
+  </div>
   <div class="actions">
-    <button type="submit">Save & Commit</button>
+    <input type="text" name="commit_message" placeholder="Commit message" value="chore(editor): update projects.json">
+    <button type="submit" class="btn">Save & Commit</button>
+    <span class="muted">Saves to <code>{{ gh.repo }}</code> @ <code>{{ gh.branch }}</code></span>
   </div>
 </form>
 """
@@ -122,19 +141,54 @@ def normalize(rows: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     return cleaned
 
 
+def _gh_headers() -> dict[str, str]:
+    return {
+        "Authorization": f"Bearer {GITHUB_TOKEN}" if GITHUB_TOKEN else "",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        "User-Agent": "LungWai-Editor/1.0",
+    }
+
+
+def github_status() -> dict[str, Any]:
+    status = {
+        "repo": GITHUB_REPO,
+        "branch": GITHUB_BRANCH,
+        "path": TARGET_REMOTE_PATH,
+        "token_present": bool(GITHUB_TOKEN),
+        "status": "not configured" if not (GITHUB_TOKEN and GITHUB_REPO) else "checking",
+        "message": "",
+    }
+    if not (GITHUB_TOKEN and GITHUB_REPO):
+        return status
+    try:
+        url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{TARGET_REMOTE_PATH}?ref={GITHUB_BRANCH}"
+        r = requests.get(url, headers=_gh_headers(), allow_redirects=False, timeout=10)
+        if r.status_code == 200:
+            status["status"] = "ok"
+            status["message"] = "file reachable"
+        else:
+            status["status"] = f"{r.status_code}"
+            status["message"] = (r.json().get("message") if r.headers.get("content-type","" ).startswith("application/json") else r.text)[:200]
+    except Exception as e:
+        status["status"] = "error"
+        status["message"] = str(e)
+    return status
+
+
 def github_get_file_sha(path: str) -> str | None:
     if not (GITHUB_TOKEN and GITHUB_REPO):
         return None
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{path}?ref={GITHUB_BRANCH}"
-    r = requests.get(url, headers={"Authorization": f"Bearer {GITHUB_TOKEN}", "Accept": "application/vnd.github+json"})
+    r = requests.get(url, headers=_gh_headers(), allow_redirects=False, timeout=15)
     if r.status_code == 200:
         return r.json().get("sha")
     return None
 
 
-def github_upsert_file(path: str, content_bytes: bytes, message: str) -> bool:
+def github_upsert_file(path: str, content_bytes: bytes, message: str) -> tuple[bool, int, str]:
     if not (GITHUB_TOKEN and GITHUB_REPO):
-        return False
+        return False, 0, "missing token or repo"
     sha = github_get_file_sha(path)
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{path}"
     payload = {
@@ -144,15 +198,27 @@ def github_upsert_file(path: str, content_bytes: bytes, message: str) -> bool:
     }
     if sha:
         payload["sha"] = sha
-    r = requests.put(url, headers={"Authorization": f"Bearer {GITHUB_TOKEN}", "Accept": "application/vnd.github+json"}, json=payload)
-    return r.status_code in (200, 201)
+    r = requests.put(url, headers=_gh_headers(), json=payload, allow_redirects=False, timeout=20)
+    ok = r.status_code in (200, 201)
+    err = ""
+    if not ok:
+        try:
+            err = r.json().get("message", "")
+        except Exception:
+            err = r.text[:300]
+        if r.is_redirect or r.status_code in (301, 302, 303, 307, 308):
+            loc = r.headers.get("Location", "")
+            if loc:
+                err = f"redirected to {loc}"
+    return ok, r.status_code, err
 
 
 @app.get("/api/editor")
 @app.get("/")
 def index():
     data = load_data()
-    return render_template_string(TEMPLATE, data=data)
+    gh = github_status()
+    return render_template_string(TEMPLATE, data=data, gh=gh)
 
 
 @app.post("/api/editor")
@@ -184,11 +250,12 @@ def save():
     except Exception:
         pass
 
-    ok = github_upsert_file("LungWai/projects.json", content_bytes, "chore(editor): update projects.json via Vercel editor")
+    commit_message = request.form.get("commit_message") or "chore(editor): update projects.json"
+    ok, code, err = github_upsert_file(TARGET_REMOTE_PATH, content_bytes, commit_message)
     if ok:
         flash("Saved and committed projects.json. GitHub Actions will regenerate README.")
     else:
-        flash("Saved locally. Missing/invalid GitHub credentials; not committed.")
+        flash(f"Commit failed ({code}): {err}")
 
     return redirect("/api/editor")
 

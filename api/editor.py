@@ -54,19 +54,19 @@ TEMPLATE = """
           </tr>
         </thead>
         <tbody>
-          {% for idx, row in enumerate(rows) %}
+          {% for row in rows %}
           <tr>
-            <td><input name="{{ key }}[{{ idx }}][name]" value="{{ row.get('name','') }}" required></td>
-            <td><input name="{{ key }}[{{ idx }}][repo]" value="{{ row.get('repo','') }}"></td>
+            <td><input name="{{ key }}[{{ loop.index0 }}][name]" value="{{ row.get('name','') }}" required></td>
+            <td><input name="{{ key }}[{{ loop.index0 }}][repo]" value="{{ row.get('repo','') }}"></td>
             <td>
-              <select name="{{ key }}[{{ idx }}][visibility]">
+              <select name="{{ key }}[{{ loop.index0 }}][visibility]">
                 <option value="public" {% if row.get('visibility','public')=='public' %}selected{% endif %}>public</option>
                 <option value="private" {% if row.get('visibility')=='private' %}selected{% endif %}>private</option>
               </select>
             </td>
-            <td><input name="{{ key }}[{{ idx }}][deploy]" value="{{ row.get('deploy','') }}"></td>
-            <td><textarea name="{{ key }}[{{ idx }}][desc]">{{ row.get('desc','') }}</textarea></td>
-            <td><input type="checkbox" name="{{ key }}[{{ idx }}][_remove]"></td>
+            <td><input name="{{ key }}[{{ loop.index0 }}][deploy]" value="{{ row.get('deploy','') }}"></td>
+            <td><textarea name="{{ key }}[{{ loop.index0 }}][desc]">{{ row.get('desc','') }}</textarea></td>
+            <td><input type="checkbox" name="{{ key }}[{{ loop.index0 }}][_remove]"></td>
           </tr>
           {% endfor %}
           <tr>
@@ -93,6 +93,8 @@ TEMPLATE = """
 """
 
 def load_data() -> dict[str, list[dict[str, Any]]]:
+    if not DATA.exists():
+        return {}
     return json.loads(DATA.read_text(encoding="utf-8"))
 
 

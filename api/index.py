@@ -7,11 +7,11 @@ from pathlib import Path
 from typing import Any
 
 import requests
-from flask import Flask, render_template_string, request, redirect, url_for, flash, abort
+from flask import Flask, render_template_string, request, redirect, flash, abort
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "projects.json"
-README = ROOT / "README.md"
+TMP_DATA = Path("/tmp/projects.json")
 
 PASSWORD = os.getenv("EDITOR_PASSWORD", "")
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "")
@@ -37,7 +37,7 @@ TEMPLATE = """
   .actions { margin-top: 16px; display: flex; gap: 8px; }
 </style>
 <h1>Projects Editor</h1>
-<form method="post" action="{{ url_for('save') }}">
+<form method="post" action="/api/editor">
   <p><label>Password: <input type="password" name="password" required></label></p>
   {% for key, rows in data.items() %}
     <div class="section">
@@ -93,9 +93,13 @@ TEMPLATE = """
 """
 
 def load_data() -> dict[str, list[dict[str, Any]]]:
-    if not DATA.exists():
-        return {}
-    return json.loads(DATA.read_text(encoding="utf-8"))
+    data_file = ROOT / "projects.json"
+    if data_file.exists():
+        return json.loads(data_file.read_text(encoding="utf-8"))
+    tmp_file = Path("/tmp/projects.json")
+    if tmp_file.exists():
+        return json.loads(tmp_file.read_text(encoding="utf-8"))
+    return {}
 
 
 def normalize(rows: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
@@ -144,17 +148,17 @@ def github_upsert_file(path: str, content_bytes: bytes, message: str) -> bool:
     return r.status_code in (200, 201)
 
 
-@app.get("/")
 @app.get("/api/editor")
+@app.get("/")
 def index():
     data = load_data()
     return render_template_string(TEMPLATE, data=data)
 
 
-@app.post("/")
-@app.post("/save")
 @app.post("/api/editor")
 @app.post("/api/editor/save")
+@app.post("/")
+@app.post("/save")
 def save():
     if PASSWORD and request.form.get("password") != PASSWORD:
         abort(401)
@@ -174,27 +178,19 @@ def save():
     for section, rows in grouped.items():
         data[section] = normalize(rows)
 
-    # Write locally (for immediate view)
-    DATA.write_text(json.dumps(data, indent=2), encoding="utf-8")
+    content_bytes = json.dumps(data, indent=2).encode("utf-8")
+    try:
+        (Path("/tmp") / "projects.json").write_text(content_bytes.decode("utf-8"), encoding="utf-8")
+    except Exception:
+        pass
 
-    # Commit to GitHub to trigger Actions regeneration
-    ok = github_upsert_file("LungWai/projects.json", DATA.read_bytes(), "chore(editor): update projects.json via Vercel editor")
+    ok = github_upsert_file("LungWai/projects.json", content_bytes, "chore(editor): update projects.json via Vercel editor")
     if ok:
         flash("Saved and committed projects.json. GitHub Actions will regenerate README.")
     else:
         flash("Saved locally. Missing/invalid GitHub credentials; not committed.")
 
-    # Redirect back to appropriate path
-    try:
-        return redirect(url_for("index"))
-    except Exception:
-        return redirect("/api/editor")
-
-
-# Vercel entry
-
-def handler(event=None, context=None):  # pragma: no cover
-    return app
+    return redirect("/api/editor")
 
 
 if __name__ == "__main__":

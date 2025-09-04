@@ -1,10 +1,1 @@
-{
-  "version": 2,
-  "builds": [
-    { "src": "api/editor.py", "use": "@vercel/python" }
-  ],
-  "routes": [
-    { "src": "/api/editor", "dest": "/api/editor.py" },
-    { "src": "/api/editor/.*", "dest": "/api/editor.py" }
-  ]
-} 
+{  "version": 2,  "builds": [    { "src": "api/editor.py", "use": "@vercel/python" }  ],  "routes": [    { "src": "^/api/editor(?:/.*)?$", "dest": "/api/editor.py" },    { "src": "^/assets/(.*)$", "dest": "/LungWai/assets/$1" },    { "src": "^/$", "dest": "/LungWai/index.html" },    { "src": "^(?!/api/)(.*)$", "dest": "/LungWai/$1" }  ]}  

@@ -22,6 +22,7 @@ GITHUB_BRANCH = os.getenv("GITHUB_BRANCH", "main")
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-key")
+app.config.update(SESSION_COOKIE_SAMESITE="Lax", SESSION_COOKIE_SECURE=False)
 
 TEMPLATE = """
 <!doctype html>
@@ -57,7 +58,6 @@ TEMPLATE = """
   <div><b>Status</b>: {{ gh.status }}{% if gh.message %} — {{ gh.message }}{% endif %}</div>
 </div>
 <form method="post" action="/api/editor" onsubmit="return confirm('Proceed to save & commit changes?');">
-  <p><label>Password: <input type="password" name="password" required></label></p>
   <div class="grid">
   {% for key, rows in data.items() %}
     <div class="section" data-section="{{ key }}">

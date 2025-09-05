@@ -160,6 +160,17 @@
             ga("create", "UA-105392568-1", "auto");
             ga("send", "pageview");
         </script>
+        <style>
+            .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+            .modal { background: #111; color: #fff; padding: 20px; border-radius: 10px; width: 90%; max-width: 360px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+            .modal h3 { margin: 0 0 12px 0; font-family: sans-serif; }
+            .modal input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #333; background: #0b0b0b; color: #fff; }
+            .modal .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+            .modal .actions button { padding: 8px 12px; border: 0; border-radius: 8px; cursor: pointer; }
+            .modal .actions .primary { background: #2563eb; color: #fff; }
+            .modal .actions .primary:hover { background: #1d4ed8; }
+            .modal .error { color: #fca5a5; font-size: 12px; margin-top: 8px; min-height: 1em; }
+        </style>
     </head>
     <body>
         <canvas></canvas>
@@ -175,16 +186,14 @@
                         <time
                             id="year"
                             datetime="2025"
-                            >2025</time
-                        >
+                            >2025</time>
                         AquaInkGL
                     </span>
 
                     <span
                         class="divider"
                         aria-hidden="true"
-                        >│</span
-                    >
+                        >│</span>
 
                     <a
                         href="https://github.com/WishMelz/AquaInkGL"
@@ -215,13 +224,54 @@
                     <span
                         class="divider"
                         aria-hidden="true"
-                        >│</span
-                    >
+                        >│</span>
 
                     <span class="powered-by">Powered by AquaInkGL</span>
                 </div>
             </footer>
         </div>
+        <div id="login-modal" class="modal-overlay" hidden>
+            <div class="modal">
+                <h3>Enter password</h3>
+                <input type="password" id="login-password" placeholder="Password" />
+                <div class="actions">
+                    <button type="button" id="login-cancel">Cancel</button>
+                    <button type="button" id="login-submit" class="primary">Continue</button>
+                </div>
+                <div id="login-error" class="error" aria-live="polite"></div>
+            </div>
+        </div>
+        <script>
+        (function(){
+            var link = document.querySelector('.clickable a[href="/api/editor"]');
+            if(!link) return;
+            var overlay = document.getElementById('login-modal');
+            var input = document.getElementById('login-password');
+            var btnOk = document.getElementById('login-submit');
+            var btnCancel = document.getElementById('login-cancel');
+            var errorEl = document.getElementById('login-error');
+            function open(){ overlay.hidden = false; errorEl.textContent=''; input.value=''; setTimeout(function(){ input.focus(); }, 0); }
+            function close(){ overlay.hidden = true; }
+            async function submit(){
+                errorEl.textContent='';
+                var pwd = (input.value || '').trim();
+                if(!pwd){ errorEl.textContent='Password required'; return; }
+                try {
+                    var res = await fetch('/api/login', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ password: pwd }) });
+                    if(res.ok){ window.location.href = '/api/editor'; return; }
+                    var data = {}; try{ data = await res.json(); }catch(e){}
+                    errorEl.textContent = data.error || 'Login failed';
+                } catch(e) {
+                    errorEl.textContent = 'Network error';
+                }
+            }
+            link.addEventListener('click', function(e){ e.preventDefault(); open(); });
+            overlay.addEventListener('click', function(e){ if(e.target === overlay) close(); });
+            btnCancel.addEventListener('click', close);
+            btnOk.addEventListener('click', submit);
+            input.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ submit(); } });
+        })();
+        </script>
         <script src="assets/script.js"></script>
     </body>
     <script>

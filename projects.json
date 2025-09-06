@@ -307,5 +307,17 @@
       "deploy": "None",
       "desc": ""
     }
+  ],
+  "_db_products_attributes": [
+    "id",
+    "title",
+    "year",
+    "description",
+    "image",
+    "preview_image",
+    "url",
+    "category",
+    "created_at",
+    "updated_at"
   ]
 }

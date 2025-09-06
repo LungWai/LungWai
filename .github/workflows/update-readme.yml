@@ -33,13 +33,20 @@ jobs:
         run: |
           python LungWai/generate_readme.py
 
+      - name: Sync Neon DB (or write mirror JSON)
+        env:
+          NEON_DATABASE_URL: ${{ secrets.NEON_DATABASE_URL }}
+          NEON_TABLE: ${{ secrets.NEON_TABLE }}
+        run: |
+          python LungWai/sync_neon_db.py || true
+
       - name: Commit changes
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add readme.md
-            git commit -m "chore: regenerate README from projects.json"
+            git add readme.md LungWai/db_products.json || true
+            git commit -m "chore: regenerate README and sync Neon (mirror if no DB)"
             git push
           else
             echo "No changes to commit"

@@ -133,6 +133,7 @@ body {
               <th>visibility</th>
               <th>deploy</th>
               <th>desc</th>
+              <th>sync db</th>
               <th>remove</th>
             </tr>
           </thead>
@@ -151,6 +152,7 @@ body {
               </td>
               <td><input name="{{ key }}[{{ idx }}][deploy]" value="{{ row.get('deploy','') }}"></td>
               <td><textarea name="{{ key }}[{{ idx }}][desc]">{{ row.get('desc','') }}</textarea></td>
+              <td><input type="checkbox" name="{{ key }}[{{ idx }}][sync_db]" {% if row.get('sync_db') %}checked{% endif %}></td>
               <td><input type="checkbox" name="{{ key }}[{{ idx }}][_remove]"></td>
             </tr>
             {% endfor %}
@@ -166,6 +168,7 @@ body {
               </td>
               <td><input name="{{ key }}[new][deploy]" placeholder="e.g. vercel / netlify"></td>
               <td><textarea name="{{ key }}[new][desc]" placeholder="Short description"></textarea></td>
+              <td><input type="checkbox" name="{{ key }}[new][sync_db]"></td>
               <td></td>
             </tr>
           </tbody>
@@ -252,6 +255,7 @@ def normalize(rows: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
             "visibility": (row.get("visibility") or "public").strip().lower(),
             "deploy": row.get("deploy") or None,
             "desc": row.get("desc", "").strip(),
+            "sync_db": bool(row.get("sync_db")),
         }
         if not item["name"]:
             continue
@@ -260,10 +264,11 @@ def normalize(rows: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 @app.get("/")
+
 def index():
     data = load_data()
-    return render_template_string(TEMPLATE, data=data)
-
+    visible_data = {k: v for k, v in data.items() if isinstance(v, list) and all(isinstance(r, dict) for r in v)}
+    return render_template_string(TEMPLATE, data=visible_data)
 
 @app.post("/save")
 def save():
@@ -282,6 +287,15 @@ def save():
     data: dict[str, list[dict[str, Any]]] = {}
     for section, rows in grouped.items():
         data[section] = normalize(rows)
+
+    # Preserve any non-list metadata keys from the original file
+    try:
+        original = load_data()
+        for k, v in original.items():
+            if not isinstance(v, list):
+                data[k] = v
+    except Exception:
+        pass
 
     DATA.write_text(json.dumps(data, indent=2), encoding="utf-8")
 

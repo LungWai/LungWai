@@ -81,15 +81,36 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubun
 .filter{background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 10px;width:220px}
 
 .table{width:100%;border-collapse:separate;border-spacing:0}
-.table th,.table td{padding:8px 6px;vertical-align:top;border-bottom:1px solid var(--border)}
+.table th,.table td{padding:6px 6px;vertical-align:top;border-bottom:1px solid var(--border)}
 .table thead th{position:sticky;top:56px;background:var(--thead);color:inherit;font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
 .table tbody tr:hover{background:rgba(2,132,199,.06)}
 .table input[type=text],.table textarea,.table select{width:100%;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 10px;transition:box-shadow .15s ease,border-color .15s ease}
 .table textarea{min-height:64px;resize:vertical}
 .table input:focus,.table textarea:focus,.table select:focus{outline:none;border-color:var(--ring);box-shadow:0 0 0 3px rgba(14,165,233,.25)}
+
 .badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:800}
 .badge-public{background:rgba(22,163,74,.12);color:#15803d;border:1px solid rgba(22,163,74,.35)}
 .badge-private{background:rgba(239,68,68,.12);color:#b91c1c;border:1px solid rgba(239,68,68,.35)}
+
+/* Responsive grid for DB attributes with visual contrast */
+.db-attrs{display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;align-items:start;background:linear-gradient(0deg,rgba(2,132,199,.08),rgba(99,102,241,.06));padding:8px;border-radius:10px;border:1px dashed var(--border)}
+.db-attrs input[type=text], .db-attrs textarea { background: var(--panel); }
+@media (max-width:1200px){.db-attrs{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media (max-width:640px){.db-attrs{grid-template-columns:1fr;}}
+
+/* Segmented toggle for visibility */
+.segmented{display:inline-flex;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.seg-item{display:inline-flex}
+.seg-item input{display:none}
+.seg-item span{display:inline-block;padding:6px 10px;font-size:12px;cursor:pointer;user-select:none;background:transparent;color:var(--text)}
+.seg-item input:checked + span{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff}
+.segmented .seg-item + .seg-item span{border-left:1px solid var(--border)}
+
+/* Compact checkboxes */
+.checkbox-compact{transform:scale(.9); width:16px; height:16px; margin:2px auto; display:inline-block}
+
+/* Larger multi-row desc */
+.desc-field{min-height:112px}
 
 .footer-bar{position:sticky;bottom:0;backdrop-filter:blur(6px) saturate(160%);background:var(--panel);border-top:1px solid var(--border);padding:10px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .footer-bar .grow{flex:1 1 280px;min-width:220px}
@@ -155,14 +176,14 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubun
           <table class="table">
             <thead>
               <tr>
-                <th style="width: 16%">name</th>
-                <th style="width: 20%">repo</th>
+                <th style="width: 12%">name</th>
+                <th style="width: 19%">repo</th>
                 <th style="width: 12%">visibility</th>
-                <th style="width: 16%">deploy</th>
+                <th style="width: 10%">deploy</th>
                 <th>desc</th>
-                <th style="width: 18%">db-attribute</th>
-                <th style="width: 10%">sync-with-db</th>
-                <th style="width: 8%">remove</th>
+                <th style="width: 27%">db-attribute</th>
+                <th style="width: 6%">sync-with-db</th>
+                <th style="width: 5%">remove</th>
               </tr>
             </thead>
             <tbody id="tbody-{{ key }}">
@@ -171,17 +192,22 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubun
                 <td><input name="{{ key }}[{{ loop.index0 }}][name]" value="{{ row.get('name','') }}" required></td>
                 <td><input name="{{ key }}[{{ loop.index0 }}][repo]" value="{{ row.get('repo','') }}"></td>
                 <td>
-                  <select name="{{ key }}[{{ loop.index0 }}][visibility]">
-                    <option value="public" {% if row.get('visibility','public')=='public' %}selected{% endif %}>public</option>
-                    <option value="private" {% if row.get('visibility')=='private' %}selected{% endif %}>private</option>
-                  </select>
                   {% set vis = (row.get('visibility','public') or 'public') %}
-                  <span class="badge {% if vis=='private' %}badge-private{% else %}badge-public{% endif %}">{{ vis }}</span>
+                  <div class="segmented">
+                    <label class="seg-item">
+                      <input type="radio" name="{{ key }}[{{ loop.index0 }}][visibility]" value="public" {% if vis=='public' %}checked{% endif %}>
+                      <span>public</span>
+                    </label>
+                    <label class="seg-item">
+                      <input type="radio" name="{{ key }}[{{ loop.index0 }}][visibility]" value="private" {% if vis=='private' %}checked{% endif %}>
+                      <span>private</span>
+                    </label>
+                  </div>
                 </td>
                 <td><input name="{{ key }}[{{ loop.index0 }}][deploy]" value="{{ row.get('deploy','') }}"></td>
-                <td><textarea name="{{ key }}[{{ loop.index0 }}][desc]">{{ row.get('desc','') }}</textarea></td>
+                <td><textarea class="desc-field" name="{{ key }}[{{ loop.index0 }}][desc]">{{ row.get('desc','') }}</textarea></td>
                 <td>
-                  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;align-items:start">
+                  <div class="db-attrs">
                     <input type="text" placeholder="id" name="{{ key }}[{{ loop.index0 }}][db-attribute][id]" value="{{ (row.get('db-attribute') or {}).get('id','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
                     <input type="text" placeholder="title" name="{{ key }}[{{ loop.index0 }}][db-attribute][title]" value="{{ (row.get('db-attribute') or {}).get('title','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
                     <input type="text" placeholder="year" name="{{ key }}[{{ loop.index0 }}][db-attribute][year]" value="{{ (row.get('db-attribute') or {}).get('year','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
@@ -192,8 +218,8 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubun
                     <textarea placeholder="description" name="{{ key }}[{{ loop.index0 }}][db-attribute][description]" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>{{ (row.get('db-attribute') or {}).get('description','') }}</textarea>
                   </div>
                 </td>
-                <td style="text-align:center;"><input type="checkbox" name="{{ key }}[{{ loop.index0 }}][sync-with-db]" {% if row.get('sync-with-db') %}checked{% endif %}></td>
-                <td style="text-align:center;"><input type="checkbox" name="{{ key }}[{{ loop.index0 }}][_remove]"></td>
+                <td style="text-align:center;"><input class="checkbox-compact" type="checkbox" name="{{ key }}[{{ loop.index0 }}][sync-with-db]" {% if row.get('sync-with-db') %}checked{% endif %}></td>
+                <td style="text-align:center;"><input class="checkbox-compact" type="checkbox" name="{{ key }}[{{ loop.index0 }}][_remove]"></td>
               </tr>
               {% endfor %}
             </tbody>
@@ -247,9 +273,8 @@ function toggleDbFieldsForRow(tr){
   var cb = tr.querySelector("input[type='checkbox'][name$='[sync-with-db]']");
   var checked = !!(cb && cb.checked);
   tr.querySelectorAll('[data-db-field]').forEach(function(el){ el.disabled = !checked; if(!checked) { if(el.tagName==='TEXTAREA') el.value=''; else el.value=''; } });
-  // Try to hide/show the DB attributes container
-  var firstField = tr.querySelector('[data-db-field]');
-  if(firstField && firstField.parentElement){ firstField.parentElement.style.display = checked ? 'grid' : 'none'; }
+  var box = tr.querySelector('.db-attrs');
+  if(box){ box.style.display = checked ? 'grid' : 'none'; }
 }
 
 function wireSyncToggles(scope){
@@ -269,16 +294,21 @@ function addRow(section){
     <td><input name="${section}[${uid}][name]" required></td>
     <td><input name="${section}[${uid}][repo]"></td>
     <td>
-      <select name="${section}[${uid}][visibility]">
-        <option value="public" selected>public</option>
-        <option value="private">private</option>
-      </select>
-      <span class=\"badge badge-public\">public</span>
+      <div class=\"segmented\">\
+        <label class=\"seg-item\">\
+          <input type=\"radio\" name=\"${section}[${uid}][visibility]\" value=\"public\" checked>\
+          <span>public</span>\
+        </label>\
+        <label class=\"seg-item\">\
+          <input type=\"radio\" name=\"${section}[${uid}][visibility]\" value=\"private\">\
+          <span>private</span>\
+        </label>\
+      </div>
     </td>
     <td><input name="${section}[${uid}][deploy]"></td>
-    <td><textarea name="${section}[${uid}][desc]"></textarea></td>
+    <td><textarea class=\"desc-field\" name="${section}[${uid}][desc]"></textarea></td>
     <td>
-      <div style=\"display:grid;grid-template-columns:repeat(2,1fr);gap:6px;align-items:start\">\
+      <div class=\"db-attrs\">\
         <input type=\"text\" placeholder=\"id\" name=\"${section}[${uid}][db-attribute][id]\" data-db-field disabled>\
         <input type=\"text\" placeholder=\"title\" name=\"${section}[${uid}][db-attribute][title]\" data-db-field disabled>\
         <input type=\"text\" placeholder=\"year\" name=\"${section}[${uid}][db-attribute][year]\" data-db-field disabled>\
@@ -289,8 +319,8 @@ function addRow(section){
         <textarea placeholder=\"description\" name=\"${section}[${uid}][db-attribute][description]\" data-db-field disabled></textarea>
       </div>
     </td>
-    <td style=\"text-align:center;\"><input type=\"checkbox\" name=\"${section}[${uid}][sync-with-db]\"></td>
-    <td style=\"text-align:center;\"><input type=\"checkbox\" name=\"${section}[${uid}][_remove]\"></td>
+    <td style=\"text-align:center;\"><input class=\"checkbox-compact\" type=\"checkbox\" name=\"${section}[${uid}][sync-with-db]\"></td>
+    <td style=\"text-align:center;\"><input class=\"checkbox-compact\" type=\"checkbox\" name=\"${section}[${uid}][_remove]\"></td>
   `;
   tbody.appendChild(tr);
   wireSyncToggles(tr);

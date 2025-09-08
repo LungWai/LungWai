@@ -45,11 +45,11 @@ TEMPLATE = """
 body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubuntu,Cantarell,Inter,ui-sans-serif,sans-serif;background:var(--bg);color:var(--text);line-height:1.45}
 .container{max-width:1200px;margin:0 auto;padding:24px}
 .page-header{position:sticky;top:0;z-index:50;background:var(--panel);border-bottom:1px solid var(--border);backdrop-filter:saturate(130%) blur(6px)}
-.page-header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px}
+.page-header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 16px}
 .title-stack{display:flex;flex-direction:column;gap:4px}
-.eyebrow{color:var(--accent);font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
-.page-title{margin:0;font-size:24px;font-weight:800}
-.subtitle{margin:0;color:var(--muted);font-size:13px}
+.eyebrow{color:var(--accent);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.page-title{margin:0;font-size:20px;font-weight:800}
+.subtitle{margin:0;color:var(--muted);font-size:12px}
 .header-actions{display:flex;align-items:center;gap:8px}
 .btn{appearance:none;border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-weight:600;cursor:pointer;color:var(--text);background:var(--panel)}
 .btn:hover{filter:brightness(1.03)}
@@ -59,7 +59,7 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubun
 .btn.disabled,.btn:disabled{opacity:.6;cursor:not-allowed}
 
 .content{padding:24px;display:grid;gap:16px}
-.status-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px}
+.status-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:10px 12px}
 .status-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
 .stat-card{display:flex;align-items:center;gap:10px;background:linear-gradient(0deg,rgba(2,132,199,.06),transparent);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
 .stat-ico{width:26px;height:26px;display:inline-grid;place-items:center;border-radius:8px}
@@ -75,14 +75,14 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubun
 .chip.warn{background:rgba(239,68,68,.12);color:#7f1d1d;border-color:rgba(239,68,68,.35)}
 
 .section-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-.section-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:linear-gradient(0deg,rgba(2,132,199,.06),transparent)}
+.section-header{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:linear-gradient(0deg,rgba(2,132,199,.06),transparent)}
 .section-title{margin:0;font-size:18px}
 .section-tools{display:flex;gap:10px;align-items:center}
 .filter{background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 10px;width:220px}
 
 .table{width:100%;border-collapse:separate;border-spacing:0}
 .table th,.table td{padding:6px 6px;vertical-align:top;border-bottom:1px solid var(--border)}
-.table thead th{position:sticky;top:56px;background:var(--thead);color:inherit;font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.table thead th{position:sticky;top:48px;background:var(--thead);color:inherit;font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
 .table tbody tr:hover{background:rgba(2,132,199,.06)}
 .table input[type=text],.table textarea,.table select{width:100%;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 10px;transition:box-shadow .15s ease,border-color .15s ease}
 .table textarea{min-height:64px;resize:vertical}
@@ -176,14 +176,14 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubun
           <table class="table">
             <thead>
               <tr>
-                <th style="width: 12%">name</th>
+                <th style="width: 11%">name</th>
                 <th style="width: 19%">repo</th>
-                <th style="width: 12%">visibility</th>
-                <th style="width: 10%">deploy</th>
+                <th style="width: 11%">visibility</th>
+                <th style="width: 9%">deploy</th>
                 <th>desc</th>
-                <th style="width: 27%">db-attribute</th>
-                <th style="width: 6%">sync-with-db</th>
-                <th style="width: 5%">remove</th>
+                <th style="width: 28%">db-attribute</th>
+                <th style="width: 5%">sync-with-db</th>
+                <th style="width: 4%">remove</th>
               </tr>
             </thead>
             <tbody id="tbody-{{ key }}">

@@ -5,42 +5,108 @@
       "repo": "https://github.com/LungWai/Githubuilder",
       "visibility": "public",
       "deploy": "None",
-      "desc": "111"
+      "desc": "111",
+      "sync-with-db": true,
+      "db-attribute": {
+        "id": "product-1",
+        "title": "GitHub Builder",
+        "year": "2025 Q3",
+        "description": "An automated platform that streamlines repository creation and management on GitHub. The system handles branch configuration, workflow setup, and CI/CD pipeline initialization automatically.",
+        "image": "/logos/github-builder.svg",
+        "preview_image": "https://picsum.photos/id/237/800/600",
+        "url": "https://github.com",
+        "category": "Development Tools"
+      }
     },
     {
       "name": "sw128lab",
       "repo": "https://github.com/LungWai/sw128lab",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "1000-saas",
       "repo": "https://github.com/LungWai/1000-saas",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": true,
+      "db-attribute": {
+        "id": "product-3",
+        "title": "1000saas.ai",
+        "year": "2025 Q3",
+        "description": "A comprehensive platform that accelerates SaaS product development using AI-driven tools and templates. The system provides ready-to-use components and automated workflows to reduce development time.",
+        "image": "/logos/1000saas-ai.svg",
+        "preview_image": "https://picsum.photos/id/239/800/600",
+        "url": "https://1000saas.ai",
+        "category": "Development Tools"
+      }
     },
     {
       "name": "qrgen",
       "repo": "https://github.com/LungWai/qrgen",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": true,
+      "db-attribute": {
+        "id": "product-2",
+        "title": "QRCode Gen",
+        "year": "2025 Q4",
+        "description": "A professional QR code management platform designed for enterprise-scale operations. The system enables batch processing with advanced customization options and provides detailed analytics for each QR code's performance.",
+        "image": "/logos/qrcode-gen.svg",
+        "preview_image": "https://picsum.photos/id/238/800/600",
+        "url": "https://example.com/qrcodegen",
+        "category": "Business Tools"
+      }
     },
     {
       "name": "EarningFast",
       "repo": "https://github.com/LungWai/EarningFast",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "outputCursorExtensionv2",
       "repo": "https://github.com/LungWai/outputCursorExtensionv2",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     }
   ],
   "saas_in_progress": [
@@ -49,98 +115,252 @@
       "repo": "https://github.com/LungWai/easystatement",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": true,
+      "db-attribute": {
+        "id": "product-4",
+        "title": "EasyStatement",
+        "year": "2025 Q4",
+        "description": "A modern solution for transforming traditional financial statements into interactive digital formats. The platform automatically extracts and categorizes financial data while maintaining compliance standards.",
+        "image": "/logos/smart-estatement.svg",
+        "preview_image": "https://picsum.photos/id/240/800/600",
+        "url": "https://example.com/smartestatement",
+        "category": "Business Tools"
+      }
     },
     {
       "name": "salary-estimator",
       "repo": "https://github.com/LungWai/salary-estimator",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "mcp-notification-server",
       "repo": "https://github.com/LungWai/mcp-notification-server",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "winpreview",
       "repo": "https://github.com/LungWai/winpreview",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "trendSite2",
       "repo": "https://github.com/LungWai/trendSite2",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "mcpfast",
       "repo": "https://github.com/LungWai/mcpfast",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "draw-and-guess",
       "repo": "https://github.com/LungWai/draw-and-guess",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "memecoinfast",
       "repo": "https://github.com/LungWai/memecoinfast",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "sideView2",
       "repo": "https://github.com/LungWai/sideView2",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "personalprompt",
       "repo": "https://github.com/LungWai/personalprompt",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "simple-licensing-module",
       "repo": "https://github.com/LungWai/simple-licensing-module",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "project-bolt-flood-puzzle",
       "repo": "https://github.com/LungWai/project-bolt-flood-puzzle",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "project-bolt-aiImageDetector",
       "repo": "https://github.com/LungWai/project-bolt-aiImageDetector",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "ChatAppTemplate",
       "repo": "https://github.com/LungWai/ChatAppTemplate",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     }
   ],
   "dev_tools": [
@@ -149,105 +369,270 @@
       "repo": "https://github.com/LungWai/jobfinder",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "rclone",
       "repo": "https://github.com/LungWai/rclone",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "vm-tools",
       "repo": "https://github.com/LungWai/vm-tools",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "2FAuth",
       "repo": "https://github.com/LungWai/2FAuth",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "userscript-series",
       "repo": "https://github.com/LungWai/userscript-series",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "L2do-export",
       "repo": "https://github.com/LungWai/L2do-export",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "tgcrawl",
       "repo": "https://github.com/LungWai/tgcrawl",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "datastruct-visualizer",
       "repo": "https://github.com/LungWai/datastruct-visualizer",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "markdown2webpage",
       "repo": "https://github.com/LungWai/markdown2webpage",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "boltnew2api",
       "repo": "https://github.com/LungWai/boltnew2api",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "OutlookManager",
       "repo": "https://github.com/LungWai/OutlookManager",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "new-api",
       "repo": "https://github.com/LungWai/new-api",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "gemini-balance",
       "repo": "https://github.com/LungWai/gemini-balance",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "Song-downloader",
       "repo": "https://github.com/LungWai/Song-downloader",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "youtubeDL",
       "repo": "https://github.com/LungWai/youtubeDL",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     }
   ],
   "fun_projects": [
@@ -256,56 +641,144 @@
       "repo": "https://github.com/LungWai/Love-letter",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "vid-promptor",
       "repo": "https://github.com/LungWai/vid-promptor",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "userscript2extension",
       "repo": "https://github.com/LungWai/userscript2extension",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "cloth-sell",
       "repo": "https://github.com/LungWai/cloth-sell",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "indi-selling-large",
       "repo": "None",
       "visibility": "private",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "ngo-site",
       "repo": "https://github.com/LungWai/ngo-site",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "llm-poison",
       "repo": "https://github.com/LungWai/llm-poison",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     },
     {
       "name": "debridDownloader",
       "repo": "https://github.com/LungWai/debridDownloader",
       "visibility": "public",
       "deploy": "None",
-      "desc": ""
+      "desc": "",
+      "sync-with-db": false,
+      "db-attribute": {
+        "id": "",
+        "title": "",
+        "year": "",
+        "description": "",
+        "image": "",
+        "preview_image": "",
+        "url": "",
+        "category": ""
+      }
     }
   ],
   "_db_products_attributes": [

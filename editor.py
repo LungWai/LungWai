@@ -133,7 +133,8 @@ body {
               <th>visibility</th>
               <th>deploy</th>
               <th>desc</th>
-              <th>sync db</th>
+              <th>db-attribute</th>
+              <th>sync-with-db</th>
               <th>remove</th>
             </tr>
           </thead>
@@ -152,7 +153,19 @@ body {
               </td>
               <td><input name="{{ key }}[{{ idx }}][deploy]" value="{{ row.get('deploy','') }}"></td>
               <td><textarea name="{{ key }}[{{ idx }}][desc]">{{ row.get('desc','') }}</textarea></td>
-              <td><input type="checkbox" name="{{ key }}[{{ idx }}][sync_db]" {% if row.get('sync_db') %}checked{% endif %}></td>
+              <td>
+                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;align-items:start">
+                  <input type="text" placeholder="id" name="{{ key }}[{{ idx }}][db-attribute][id]" value="{{ (row.get('db-attribute') or {}).get('id','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                  <input type="text" placeholder="title" name="{{ key }}[{{ idx }}][db-attribute][title]" value="{{ (row.get('db-attribute') or {}).get('title','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                  <input type="text" placeholder="year" name="{{ key }}[{{ idx }}][db-attribute][year]" value="{{ (row.get('db-attribute') or {}).get('year','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                  <input type="text" placeholder="image" name="{{ key }}[{{ idx }}][db-attribute][image]" value="{{ (row.get('db-attribute') or {}).get('image','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                  <input type="text" placeholder="preview_image" name="{{ key }}[{{ idx }}][db-attribute][preview_image]" value="{{ (row.get('db-attribute') or {}).get('preview_image','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                  <input type="text" placeholder="url" name="{{ key }}[{{ idx }}][db-attribute][url]" value="{{ (row.get('db-attribute') or {}).get('url','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                  <input type="text" placeholder="category" name="{{ key }}[{{ idx }}][db-attribute][category]" value="{{ (row.get('db-attribute') or {}).get('category','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                  <textarea placeholder="description" name="{{ key }}[{{ idx }}][db-attribute][description]" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>{{ (row.get('db-attribute') or {}).get('description','') }}</textarea>
+                </div>
+              </td>
+              <td><input type="checkbox" name="{{ key }}[{{ idx }}][sync-with-db]" {% if row.get('sync-with-db') %}checked{% endif %}></td>
               <td><input type="checkbox" name="{{ key }}[{{ idx }}][_remove]"></td>
             </tr>
             {% endfor %}
@@ -168,7 +181,19 @@ body {
               </td>
               <td><input name="{{ key }}[new][deploy]" placeholder="e.g. vercel / netlify"></td>
               <td><textarea name="{{ key }}[new][desc]" placeholder="Short description"></textarea></td>
-              <td><input type="checkbox" name="{{ key }}[new][sync_db]"></td>
+              <td>
+                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;align-items:start">
+                  <input type="text" placeholder="id" name="{{ key }}[new][db-attribute][id]" data-db-field disabled>
+                  <input type="text" placeholder="title" name="{{ key }}[new][db-attribute][title]" data-db-field disabled>
+                  <input type="text" placeholder="year" name="{{ key }}[new][db-attribute][year]" data-db-field disabled>
+                  <input type="text" placeholder="image" name="{{ key }}[new][db-attribute][image]" data-db-field disabled>
+                  <input type="text" placeholder="preview_image" name="{{ key }}[new][db-attribute][preview_image]" data-db-field disabled>
+                  <input type="text" placeholder="url" name="{{ key }}[new][db-attribute][url]" data-db-field disabled>
+                  <input type="text" placeholder="category" name="{{ key }}[new][db-attribute][category]" data-db-field disabled>
+                  <textarea placeholder="description" name="{{ key }}[new][db-attribute][description]" data-db-field disabled></textarea>
+                </div>
+              </td>
+              <td><input type="checkbox" name="{{ key }}[new][sync-with-db]"></td>
               <td></td>
             </tr>
           </tbody>
@@ -235,6 +260,22 @@ document.querySelectorAll('[data-collapse]').forEach(function(btn){
 });
 // Auto-hide toasts
 setTimeout(function(){ document.querySelectorAll('.toast').forEach(function(t){ t.classList.remove('show'); t.style.opacity = 0; }); }, 3500);
+
+function toggleDbFieldsForRow(tr){
+  var cb = tr.querySelector("input[type='checkbox'][name$='[sync-with-db]']");
+  var checked = !!(cb && cb.checked);
+  tr.querySelectorAll('[data-db-field]').forEach(function(el){ el.disabled = !checked; if(!checked){ el.value=''; }});
+}
+
+function wireSyncToggles(scope){
+  (scope || document).querySelectorAll("input[type='checkbox'][name$='[sync-with-db]']").forEach(function(cb){
+    cb.addEventListener('change', function(){ var tr=cb.closest('tr'); if(tr) toggleDbFieldsForRow(tr); });
+  });
+}
+
+// Init
+wireSyncToggles(document);
+document.querySelectorAll('tbody tr').forEach(function(tr){ if(!tr.classList.contains('new-row')) toggleDbFieldsForRow(tr); });
 </script>
 """
 
@@ -249,16 +290,31 @@ def normalize(rows: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
             continue
         if row.get("_remove"):
             continue
-        item = {
+        sync_flag = bool(row.get("sync-with-db"))
+        item: dict[str, Any] = {
             "name": row.get("name", "").strip(),
             "repo": row.get("repo") or None,
             "visibility": (row.get("visibility") or "public").strip().lower(),
             "deploy": row.get("deploy") or None,
             "desc": row.get("desc", "").strip(),
-            "sync_db": bool(row.get("sync_db")),
+            "sync-with-db": sync_flag,
         }
         if not item["name"]:
             continue
+        if sync_flag:
+            # Use nested db-attribute payload
+            db: dict[str, Any] = {}
+            def _val(v: Any) -> Any:
+                if v is None:
+                    return None
+                vs = str(v).strip()
+                return vs if vs else None
+            nested = row.get("db-attribute") or {}
+            for k in ("id", "title", "year", "description", "image", "preview_image", "url", "category"):
+                vv = _val(nested.get(k))
+                if vv is not None:
+                    db[k] = vv
+            item["db-attribute"] = db
         cleaned.append(item)
     return cleaned
 
@@ -274,15 +330,20 @@ def index():
 def save():
     raw = request.form.to_dict(flat=False)
     grouped: dict[str, dict[str, dict[str, Any]]] = {}
-    # Parse keys like section[idx][field]
+    # Parse keys like section[idx][field] and nested section[idx][db-attribute][field]
+    import re as _re
+    key_pattern = _re.compile(r"([^\[]+)\[([^\]]+)\](?:\[([^\]]+)\](?:\[([^\]]+)\])?)?")
     for full_key, values in raw.items():
         value = values[-1] if values else ""
-        if "[" not in full_key:
+        m = key_pattern.fullmatch(full_key)
+        if not m:
             continue
-        section, rest = full_key.split("[", 1)
-        idx, rest = rest.split("]", 1)
-        field = rest.strip("[]")
-        grouped.setdefault(section, {}).setdefault(idx, {})[field] = value
+        section, idx, field, subfield = m.groups()
+        bucket = grouped.setdefault(section, {}).setdefault(idx, {})
+        if subfield:
+            bucket.setdefault(field, {})[subfield] = value
+        else:
+            bucket[field] = value
 
     data: dict[str, list[dict[str, Any]]] = {}
     for section, rows in grouped.items():

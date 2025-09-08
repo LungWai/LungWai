@@ -3,6 +3,7 @@ from __future__ import annotations
 import base64
 import json
 import os
+import re
 from pathlib import Path
 from typing import Any
 
@@ -29,13 +30,13 @@ TEMPLATE = """
 <title>Projects Editor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style>
-:root { --radius: 12px; --shadow: 0 10px 30px rgba(0,0,0,.10); }
-:root[data-theme='light'] {
+::root { --radius: 12px; --shadow: 0 10px 30px rgba(0,0,0,.10); }
+::root[data-theme='light'] {
   --bg:#f8fafc; --panel:#ffffff; --card:#ffffff; --muted:#475569; --text:#0f172a;
   --primary:#3b82f6; --accent:#06b6d4; --positive:#16a34a; --negative:#dc2626; --warning:#d97706;
   --ring:#0ea5e9; --border:rgba(15,23,42,.12); --thead:#f1f5f9;
 }
-:root[data-theme='dark'] {
+::root[data-theme='dark'] {
   --bg:#0b1220; --panel:#0f172a; --card:#111827; --muted:#94a3b8; --text:#f3f4f6;
   --primary:#6366f1; --accent:#22d3ee; --positive:#10b981; --negative:#ef4444; --warning:#f59e0b;
   --ring:#22d3ee; --border:rgba(148,163,184,.18); --thead:#0f172a;
@@ -159,6 +160,8 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubun
                 <th style="width: 12%">visibility</th>
                 <th style="width: 16%">deploy</th>
                 <th>desc</th>
+                <th style="width: 18%">db-attribute</th>
+                <th style="width: 10%">sync-with-db</th>
                 <th style="width: 8%">remove</th>
               </tr>
             </thead>
@@ -177,6 +180,19 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubun
                 </td>
                 <td><input name="{{ key }}[{{ loop.index0 }}][deploy]" value="{{ row.get('deploy','') }}"></td>
                 <td><textarea name="{{ key }}[{{ loop.index0 }}][desc]">{{ row.get('desc','') }}</textarea></td>
+                <td>
+                  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;align-items:start">
+                    <input type="text" placeholder="id" name="{{ key }}[{{ loop.index0 }}][db-attribute][id]" value="{{ (row.get('db-attribute') or {}).get('id','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                    <input type="text" placeholder="title" name="{{ key }}[{{ loop.index0 }}][db-attribute][title]" value="{{ (row.get('db-attribute') or {}).get('title','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                    <input type="text" placeholder="year" name="{{ key }}[{{ loop.index0 }}][db-attribute][year]" value="{{ (row.get('db-attribute') or {}).get('year','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                    <input type="text" placeholder="image" name="{{ key }}[{{ loop.index0 }}][db-attribute][image]" value="{{ (row.get('db-attribute') or {}).get('image','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                    <input type="text" placeholder="preview_image" name="{{ key }}[{{ loop.index0 }}][db-attribute][preview_image]" value="{{ (row.get('db-attribute') or {}).get('preview_image','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                    <input type="text" placeholder="url" name="{{ key }}[{{ loop.index0 }}][db-attribute][url]" value="{{ (row.get('db-attribute') or {}).get('url','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                    <input type="text" placeholder="category" name="{{ key }}[{{ loop.index0 }}][db-attribute][category]" value="{{ (row.get('db-attribute') or {}).get('category','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                    <textarea placeholder="description" name="{{ key }}[{{ loop.index0 }}][db-attribute][description]" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>{{ (row.get('db-attribute') or {}).get('description','') }}</textarea>
+                  </div>
+                </td>
+                <td style="text-align:center;"><input type="checkbox" name="{{ key }}[{{ loop.index0 }}][sync-with-db]" {% if row.get('sync-with-db') %}checked{% endif %}></td>
                 <td style="text-align:center;"><input type="checkbox" name="{{ key }}[{{ loop.index0 }}][_remove]"></td>
               </tr>
               {% endfor %}
@@ -225,6 +241,21 @@ document.querySelectorAll('[data-collapse]').forEach(function(btn){
 // Auto-hide toasts
 setTimeout(function(){ document.querySelectorAll('.toast').forEach(function(t){ t.classList.remove('show'); t.style.opacity=0; }); }, 3500);
 
+function toggleDbFieldsForRow(tr){
+  var checked = !!tr.querySelector("input[type='checkbox'][name$='[sync-with-db]']")?.checked;
+  tr.querySelectorAll('[data-db-field]').forEach(function(el){ el.disabled = !checked; if(!checked) { if(el.tagName==='TEXTAREA') el.value=''; else el.value=''; } });
+}
+
+function wireSyncToggles(scope){
+  (scope || document).querySelectorAll("input[type='checkbox'][name$='[sync-with-db]']").forEach(function(cb){
+    cb.addEventListener('change', function(){ var tr=cb.closest('tr'); if(tr) toggleDbFieldsForRow(tr); });
+  });
+}
+
+// Initialize on load
+wireSyncToggles(document);
+document.querySelectorAll('tbody tr').forEach(toggleDbFieldsForRow);
+
 function addRow(section){
   const tbody=document.querySelector(`.section-card[data-section="${section}"] tbody`);
   if(!tbody) return; const uid=`new_${Date.now()}_${Math.floor(Math.random()*10000)}`; const tr=document.createElement('tr');
@@ -240,21 +271,42 @@ function addRow(section){
     </td>
     <td><input name="${section}[${uid}][deploy]"></td>
     <td><textarea name="${section}[${uid}][desc]"></textarea></td>
+    <td>
+      <div style=\"display:grid;grid-template-columns:repeat(2,1fr);gap:6px;align-items:start\">\
+        <input type=\"text\" placeholder=\"id\" name=\"${section}[${uid}][db-attribute][id]\" data-db-field disabled>\
+        <input type=\"text\" placeholder=\"title\" name=\"${section}[${uid}][db-attribute][title]\" data-db-field disabled>\
+        <input type=\"text\" placeholder=\"year\" name=\"${section}[${uid}][db-attribute][year]\" data-db-field disabled>\
+        <input type=\"text\" placeholder=\"image\" name=\"${section}[${uid}][db-attribute][image]\" data-db-field disabled>\
+        <input type=\"text\" placeholder=\"preview_image\" name=\"${section}[${uid}][db-attribute][preview_image]\" data-db-field disabled>\
+        <input type=\"text\" placeholder=\"url\" name=\"${section}[${uid}][db-attribute][url]\" data-db-field disabled>\
+        <input type=\"text\" placeholder=\"category\" name=\"${section}[${uid}][db-attribute][category]\" data-db-field disabled>\
+        <textarea placeholder=\"description\" name=\"${section}[${uid}][db-attribute][description]\" data-db-field disabled></textarea>
+      </div>
+    </td>
+    <td style=\"text-align:center;\"><input type=\"checkbox\" name=\"${section}[${uid}][sync-with-db]\"></td>
     <td style=\"text-align:center;\"><input type=\"checkbox\" name=\"${section}[${uid}][_remove]\"></td>
   `;
   tbody.appendChild(tr);
+  wireSyncToggles(tr);
 }
 </script>
 """
 
 def load_data() -> dict[str, list[dict[str, Any]]]:
     data_file = ROOT / "projects.json"
+    loaded: dict[str, Any] = {}
     if data_file.exists():
-        return json.loads(data_file.read_text(encoding="utf-8"))
-    tmp_file = Path("/tmp/projects.json")
-    if tmp_file.exists():
-        return json.loads(tmp_file.read_text(encoding="utf-8"))
-    return {}
+        loaded = json.loads(data_file.read_text(encoding="utf-8"))
+    else:
+        tmp_file = Path("/tmp/projects.json")
+        if tmp_file.exists():
+            loaded = json.loads(tmp_file.read_text(encoding="utf-8"))
+    # Return only list-of-dict sections for rendering to avoid Jinja errors
+    filtered: dict[str, list[dict[str, Any]]] = {}
+    for k, v in (loaded or {}).items():
+        if isinstance(v, list) and all(isinstance(r, dict) for r in v):
+            filtered[k] = v
+    return filtered
 
 
 def normalize(rows: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
@@ -264,15 +316,32 @@ def normalize(rows: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
             continue
         if row.get("_remove"):
             continue
-        item = {
-            "name": row.get("name", "").strip(),
+        sync_flag = bool(row.get("sync-with-db"))
+        item: dict[str, Any] = {
+            "name": (row.get("name") or "").strip(),
             "repo": row.get("repo") or None,
             "visibility": (row.get("visibility") or "public").strip().lower(),
             "deploy": row.get("deploy") or None,
-            "desc": row.get("desc", "").strip(),
+            "desc": (row.get("desc") or "").strip(),
+            "sync-with-db": sync_flag,
         }
         if not item["name"]:
             continue
+        if sync_flag:
+            # Build nested db-attribute dict from nested form fields
+            db: dict[str, Any] = {}
+            def _val(v: Any) -> Any:
+                if v is None:
+                    return None
+                vs = str(v).strip()
+                return vs if vs else None
+            # Expect nested keys already grouped by parser
+            nested = row.get("db-attribute") or {}
+            for k in ("id", "title", "year", "description", "image", "preview_image", "url", "category"):
+                vv = _val(nested.get(k))
+                if vv is not None:
+                    db[k] = vv
+            item["db-attribute"] = db
         cleaned.append(item)
     return cleaned
 
@@ -383,7 +452,9 @@ def logout():
 def index():
     data = load_data()
     gh = github_status()
-    return render_template_string(TEMPLATE, data=data, gh=gh)
+    # Ensure template always receives dict[str, list[dict]]
+    safe_data = {k: v for k, v in (data or {}).items() if isinstance(v, list) and all(isinstance(r, dict) for r in v)}
+    return render_template_string(TEMPLATE, data=safe_data, gh=gh)
 
 
 @app.post("/api/editor")
@@ -392,18 +463,31 @@ def save():
     # session-based auth enforced by before_request
     raw = request.form.to_dict(flat=False)
     grouped: dict[str, dict[str, dict[str, Any]]] = {}
+    key_pattern = re.compile(r"([^\[]+)\[([^\]]+)\](?:\[([^\]]+)\](?:\[([^\]]+)\])?)?")
     for full_key, values in raw.items():
         value = values[-1] if values else ""
-        if "[" not in full_key:
+        m = key_pattern.fullmatch(full_key)
+        if not m:
             continue
-        section, rest = full_key.split("[", 1)
-        idx, rest = rest.split("]", 1)
-        field = rest.strip("[]")
-        grouped.setdefault(section, {}).setdefault(idx, {})[field] = value
+        section, idx, field, subfield = m.groups()
+        bucket = grouped.setdefault(section, {}).setdefault(idx, {})
+        if subfield:
+            bucket.setdefault(field, {})[subfield] = value
+        else:
+            bucket[field] = value
 
     data: dict[str, list[dict[str, Any]]] = {}
     for section, rows in grouped.items():
         data[section] = normalize(rows)
+
+    # Preserve non-list metadata keys from the original file
+    try:
+        original = json.loads((ROOT / "projects.json").read_text(encoding="utf-8"))
+        for k, v in original.items():
+            if not isinstance(v, list):
+                data[k] = v
+    except Exception:
+        pass
 
     content_bytes = json.dumps(data, indent=2).encode("utf-8")
     try:

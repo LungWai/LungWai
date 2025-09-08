@@ -46,20 +46,21 @@ def _collect_projects(d: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def _project_to_product(row: dict[str, Any]) -> dict[str, Any]:
-    title = (row.get("name") or "").strip()
-    url = row.get("repo") or None
-    description = (row.get("desc") or "").strip() or None
-    ident = f"product-{_slugify(title)[:64]}"
+    db = row.get("db-attribute") or {}
+    title_from_row = (db.get("title") or row.get("title") or row.get("name") or "").strip()
+    ident = (db.get("id") or row.get("id") or f"product-{_slugify(title_from_row)[:64]}")
+    description = (db.get("description") or row.get("description") or row.get("desc") or "").strip() or None
+    url = db.get("url") or row.get("url") or row.get("deploy") or row.get("repo") or None
     now = _now()
     product = {
         "id": ident,
-        "title": title or ident,
-        "year": None,
+        "title": title_from_row or ident,
+        "year": db.get("year") or row.get("year"),
         "description": description,
-        "image": None,
-        "preview_image": None,
+        "image": db.get("image") or row.get("image"),
+        "preview_image": db.get("preview_image") or row.get("preview_image"),
         "url": url,
-        "category": None,
+        "category": db.get("category") or row.get("category"),
         "created_at": now,
         "updated_at": now,
     }
@@ -75,13 +76,9 @@ def _prepare_records() -> list[dict[str, Any]]:
     items = _collect_projects(data)
     products = []
     for it in items:
-        if not it.get("sync_db"):
+        if not it.get("sync-with-db"):
             continue
         product = _project_to_product(it)
-        # If projects.json provides richer attributes, pass them through
-        for k in ("year", "image", "preview_image", "category"):
-            if it.get(k):
-                product[k] = it[k]
         products.append(product)
     return products
 

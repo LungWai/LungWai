@@ -30,13 +30,13 @@ TEMPLATE = """
 <title>Projects Editor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style>
-::root { --radius: 12px; --shadow: 0 10px 30px rgba(0,0,0,.10); }
-::root[data-theme='light'] {
+:root { --radius: 12px; --shadow: 0 10px 30px rgba(0,0,0,.10); }
+:root[data-theme='light'] {
   --bg:#f8fafc; --panel:#ffffff; --card:#ffffff; --muted:#475569; --text:#0f172a;
   --primary:#3b82f6; --accent:#06b6d4; --positive:#16a34a; --negative:#dc2626; --warning:#d97706;
   --ring:#0ea5e9; --border:rgba(15,23,42,.12); --thead:#f1f5f9;
 }
-::root[data-theme='dark'] {
+:root[data-theme='dark'] {
   --bg:#0b1220; --panel:#0f172a; --card:#111827; --muted:#94a3b8; --text:#f3f4f6;
   --primary:#6366f1; --accent:#22d3ee; --positive:#10b981; --negative:#ef4444; --warning:#f59e0b;
   --ring:#22d3ee; --border:rgba(148,163,184,.18); --thead:#0f172a;
@@ -81,7 +81,7 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubun
 .filter{background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 10px;width:220px}
 
 .table{width:100%;border-collapse:separate;border-spacing:0}
-.table th,.table td{padding:10px 8px;vertical-align:top;border-bottom:1px solid var(--border)}
+.table th,.table td{padding:8px 6px;vertical-align:top;border-bottom:1px solid var(--border)}
 .table thead th{position:sticky;top:56px;background:var(--thead);color:inherit;font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
 .table tbody tr:hover{background:rgba(2,132,199,.06)}
 .table input[type=text],.table textarea,.table select{width:100%;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 10px;transition:box-shadow .15s ease,border-color .15s ease}
@@ -224,9 +224,11 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubun
 // Filter rows within a section
 document.querySelectorAll('.filter').forEach(function(input){
   input.addEventListener('input', function(){
-    var targetId=input.getAttribute('data-target'); var tbody=document.getElementById(targetId); if(!tbody) return;
+    var targetId=input.getAttribute('data-target');
+    var tbody = targetId ? document.getElementById(targetId) : (input.closest('.section-card')?.querySelector('tbody'));
+    if(!tbody) return;
     var q=input.value.trim().toLowerCase();
-    tbody.querySelectorAll('tr').forEach(function(tr){ var text=tr.textContent.toLowerCase(); tr.style.display=(q===''||text.indexOf(q)!==-1)?'':'none'; });
+    tbody.querySelectorAll('tr').forEach(function(tr){ if(tr.classList.contains('new-row')) return; var text=tr.textContent.toLowerCase(); tr.style.display=(q===''||text.indexOf(q)!==-1)?'':'none'; });
   });
 });
 // Collapse/expand section body
@@ -242,8 +244,12 @@ document.querySelectorAll('[data-collapse]').forEach(function(btn){
 setTimeout(function(){ document.querySelectorAll('.toast').forEach(function(t){ t.classList.remove('show'); t.style.opacity=0; }); }, 3500);
 
 function toggleDbFieldsForRow(tr){
-  var checked = !!tr.querySelector("input[type='checkbox'][name$='[sync-with-db]']")?.checked;
+  var cb = tr.querySelector("input[type='checkbox'][name$='[sync-with-db]']");
+  var checked = !!(cb && cb.checked);
   tr.querySelectorAll('[data-db-field]').forEach(function(el){ el.disabled = !checked; if(!checked) { if(el.tagName==='TEXTAREA') el.value=''; else el.value=''; } });
+  // Try to hide/show the DB attributes container
+  var firstField = tr.querySelector('[data-db-field]');
+  if(firstField && firstField.parentElement){ firstField.parentElement.style.display = checked ? 'grid' : 'none'; }
 }
 
 function wireSyncToggles(scope){
@@ -254,7 +260,7 @@ function wireSyncToggles(scope){
 
 // Initialize on load
 wireSyncToggles(document);
-document.querySelectorAll('tbody tr').forEach(toggleDbFieldsForRow);
+document.querySelectorAll('tbody tr').forEach(function(tr){ if(!tr.classList.contains('new-row')) toggleDbFieldsForRow(tr); });
 
 function addRow(section){
   const tbody=document.querySelector(`.section-card[data-section="${section}"] tbody`);

@@ -15,88 +15,55 @@ app.secret_key = "dev-key"
 
 TEMPLATE = """
 <!doctype html>
+<meta charset="utf-8" />
 <title>Projects Editor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style>
-:root {
-  --radius: 12px;
-  --shadow: 0 10px 30px rgba(0,0,0,.10);
-}
-:root[data-theme='light'] {
-  --bg: #f8fafc;
-  --panel: #ffffff;
-  --card: #ffffff;
-  --muted: #475569;
-  --text: #0f172a;
-  --primary: #3b82f6;
-  --accent: #06b6d4;
-  --positive: #16a34a;
-  --negative: #dc2626;
-  --warning: #d97706;
-  --ring: #0ea5e9;
-  --border: rgba(15,23,42,.12);
-  --thead: #f1f5f9;
-}
-:root[data-theme='dark'] {
-  --bg: #0b1220;
-  --panel: #0f172a;
-  --card: #111827;
-  --muted: #94a3b8;
-  --text: #f3f4f6;
-  --primary: #6366f1;
-  --accent: #22d3ee;
-  --positive: #10b981;
-  --negative: #ef4444;
-  --warning: #f59e0b;
-  --ring: #22d3ee;
-  --border: rgba(148,163,184,.18);
-  --thead: #0f172a;
-}
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Inter, ui-sans-serif, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.45;
-}
-.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
-.page-header { position: sticky; top: 0; z-index: 50; background: var(--panel); border-bottom: 1px solid var(--border); backdrop-filter: saturate(130%) blur(6px); }
-.page-header-inner { display:flex; align-items:center; justify-content: space-between; gap: 16px; padding: 16px 24px; }
-.title-stack { display:flex; flex-direction:column; gap: 4px; }
-.eyebrow { color: var(--accent); font-weight: 700; font-size: 12px; letter-spacing:.12em; text-transform: uppercase; }
-.page-title { margin: 0; font-size: 24px; font-weight: 800; }
-.subtitle { margin: 0; color: var(--muted); font-size: 13px; }
-.header-actions { display:flex; align-items:center; gap: 8px; }
-.btn { appearance: none; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; font-weight: 600; cursor: pointer; color: var(--text); background: var(--panel); }
-.btn:hover { filter: brightness(1.03); }
-.btn-primary { color: white; background: linear-gradient(135deg, var(--primary), var(--accent)); border: 0; box-shadow: 0 6px 20px rgba(2,132,199,.20); }
-.btn-ghost { background: transparent; }
-.content { padding: 24px; }
-.section-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow:hidden; margin: 20px 0; }
-.section-header { display:flex; align-items:center; justify-content: space-between; padding: 14px 16px; background: linear-gradient(0deg, rgba(2,132,199,.06), transparent); }
-.section-title { margin: 0; font-size: 18px; }
-.section-tools { display:flex; gap: 10px; align-items:center; }
-.filter { background: var(--panel); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; width: 220px; }
-.table { width: 100%; border-collapse: separate; border-spacing: 0; }
-.table th, .table td { padding: 10px 8px; vertical-align: top; border-bottom: 1px solid var(--border); }
-.table thead th { position: sticky; top: 56px; background: var(--thead); color: inherit; font-weight: 800; font-size: 12px; letter-spacing:.06em; text-transform: uppercase; }
-.table tbody tr:hover { background: rgba(2,132,199,.06); }
-.table input[type=text], .table textarea, .table select { width: 100%; background: var(--panel); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; transition: box-shadow .15s ease, border-color .15s ease; }
-.table textarea { min-height: 64px; }
-.table input:focus, .table textarea:focus, .table select:focus { outline: none; border-color: var(--ring); box-shadow: 0 0 0 3px rgba(14,165,233,.25); }
-.badge { display:inline-block; padding: 4px 8px; border-radius: 999px; font-size: 12px; font-weight: 800; }
-.badge-public { background: rgba(22,163,74,.12); color: #15803d; border: 1px solid rgba(22,163,74,.35); }
-.badge-private { background: rgba(239,68,68,.12); color: #b91c1c; border: 1px solid rgba(239,68,68,.35); }
-.new-row { background: linear-gradient(90deg, rgba(2,132,199,.08), rgba(99,102,241,.08)); }
-.actions { margin-top: 16px; display:flex; gap:8px; }
-.footer-bar { position: sticky; bottom: 0; backdrop-filter: blur(6px) saturate(160%); background: var(--panel); border-top: 1px solid var(--border); padding: 10px 16px; display:flex; justify-content: space-between; align-items:center; }
-.toast-container { position: fixed; right: 16px; bottom: 16px; display:flex; flex-direction: column; gap: 8px; z-index: 100; }
-.toast { background: var(--panel); color: var(--text); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 10px 12px; border-radius: 10px; box-shadow: var(--shadow); opacity: 0; transform: translateY(8px); transition: .25s ease; }
-.toast.show { opacity: 1; transform: translateY(0); }
-.small { font-size: 12px; color: var(--muted); }
-@media (max-width: 800px) { .page-title { font-size: 20px; } .section-header { flex-direction: column; align-items: stretch; gap: 8px; } .filter { width: 100%; } .table thead th { top: 92px; } }
+:root { --radius: 12px; --shadow: 0 10px 30px rgba(0,0,0,.10); }
+:root[data-theme='light'] { --bg:#f8fafc; --panel:#ffffff; --card:#ffffff; --muted:#475569; --text:#0f172a; --primary:#3b82f6; --accent:#06b6d4; --positive:#16a34a; --negative:#dc2626; --warning:#d97706; --ring:#0ea5e9; --border:rgba(15,23,42,.12); --thead:#f1f5f9; }
+:root[data-theme='dark'] { --bg:#0b1220; --panel:#0f172a; --card:#111827; --muted:#94a3b8; --text:#f3f4f6; --primary:#6366f1; --accent:#22d3ee; --positive:#10b981; --negative:#ef4444; --warning:#f59e0b; --ring:#22d3ee; --border:rgba(148,163,184,.18); --thead:#0f172a; }
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubuntu,Cantarell,Inter,ui-sans-serif,sans-serif;background:var(--bg);color:var(--text);line-height:1.45}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+.page-header{position:sticky;top:0;z-index:50;background:var(--panel);border-bottom:1px solid var(--border);backdrop-filter:saturate(130%) blur(6px)}
+.page-header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px}
+.title-stack{display:flex;flex-direction:column;gap:4px}
+.eyebrow{color:var(--accent);font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.page-title{margin:0;font-size:24px;font-weight:800}
+.subtitle{margin:0;color:var(--muted);font-size:13px}
+.header-actions{display:flex;align-items:center;gap:8px}
+.btn{appearance:none;border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-weight:600;cursor:pointer;color:var(--text);background:var(--panel)}
+.btn:hover{filter:brightness(1.03)}
+.btn-primary{color:white;background:linear-gradient(135deg,var(--primary),var(--accent));border:0;box-shadow:0 6px 20px rgba(2,132,199,.20)}
+.btn-ghost{background:transparent}
+.content{padding:24px}
+.section-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin:20px 0}
+.section-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:linear-gradient(0deg, rgba(2,132,199,.06), transparent)}
+.section-title{margin:0;font-size:18px}
+.section-tools{display:flex;gap:10px;align-items:center}
+.filter{background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 10px;width:220px}
+.table{width:100%;border-collapse:separate;border-spacing:0}
+.table th,.table td{padding:8px 6px;vertical-align:top;border-bottom:1px solid var(--border)}
+.table thead th{position:sticky;top:56px;background:var(--thead);color:inherit;font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.table tbody tr:hover{background:rgba(2,132,199,.06)}
+.table input[type=text],.table textarea,.table select{width:100%;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:6px 8px;font-size:14px;transition:box-shadow .15s ease,border-color .15s ease}
+.table textarea{min-height:52px}
+.table input:focus,.table textarea:focus,.table select:focus{outline:none;border-color:var(--ring);box-shadow:0 0 0 3px rgba(14,165,233,.25)}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:800}
+.badge-public{background:rgba(22,163,74,.12);color:#15803d;border:1px solid rgba(22,163,74,.35)}
+.badge-private{background:rgba(239,68,68,.12);color:#b91c1c;border:1px solid rgba(239,68,68,.35)}
+.new-row{background:linear-gradient(90deg,rgba(2,132,199,.08),rgba(99,102,241,.08))}
+.actions{margin-top:16px;display:flex;gap:8px}
+.footer-bar{position:sticky;bottom:0;backdrop-filter:blur(6px) saturate(160%);background:var(--panel);border-top:1px solid var(--border);padding:10px 16px;display:flex;justify-content:space-between;align-items:center}
+.toast-container{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:8px;z-index:100}
+.toast{background:var(--panel);color:var(--text);border:1px solid var(--border);border-left:4px solid var(--accent);padding:10px 12px;border-radius:10px;box-shadow:var(--shadow);opacity:0;transform:translateY(8px);transition:.25s ease}
+.toast.show{opacity:1;transform:translateY(0)}
+.small{font-size:12px;color:var(--muted)}
+/* Hide DB attributes until sync is enabled */
+.db-attrs{display:none;grid-template-columns:repeat(2,1fr);gap:6px;align-items:start}
+.row--sync .db-attrs{display:grid}
+@media (max-width:800px){.page-title{font-size:20px}.section-header{flex-direction:column;align-items:stretch;gap:8px}.filter{width:100%}.table thead th{top:92px}}
 </style>
 
 <header class="page-header">
@@ -120,7 +87,7 @@ body {
       <div class="section-header">
         <h2 class="section-title">{{ key }}</h2>
         <div class="section-tools">
-          <input type="text" class="filter" placeholder="Filter rows…" data-target="tbody-{{ key }}">
+          <input type="text" class="filter" placeholder="Filter rows..." data-target="tbody-{{ key }}">
           <button type="button" class="btn btn-ghost" data-collapse="tbody-{{ key }}">Toggle</button>
         </div>
       </div>
@@ -140,7 +107,7 @@ body {
           </thead>
           <tbody id="tbody-{{ key }}">
             {% for idx, row in enumerate(rows) %}
-            <tr>
+            <tr class="{% if row.get('sync-with-db') %}row--sync{% endif %}">
               <td><input name="{{ key }}[{{ idx }}][name]" value="{{ row.get('name','') }}" required></td>
               <td><input name="{{ key }}[{{ idx }}][repo]" value="{{ row.get('repo','') }}"></td>
               <td>
@@ -154,7 +121,7 @@ body {
               <td><input name="{{ key }}[{{ idx }}][deploy]" value="{{ row.get('deploy','') }}"></td>
               <td><textarea name="{{ key }}[{{ idx }}][desc]">{{ row.get('desc','') }}</textarea></td>
               <td>
-                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;align-items:start">
+                <div class="db-attrs">
                   <input type="text" placeholder="id" name="{{ key }}[{{ idx }}][db-attribute][id]" value="{{ (row.get('db-attribute') or {}).get('id','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
                   <input type="text" placeholder="title" name="{{ key }}[{{ idx }}][db-attribute][title]" value="{{ (row.get('db-attribute') or {}).get('title','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
                   <input type="text" placeholder="year" name="{{ key }}[{{ idx }}][db-attribute][year]" value="{{ (row.get('db-attribute') or {}).get('year','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
@@ -170,7 +137,7 @@ body {
             </tr>
             {% endfor %}
             <tr class="new-row">
-              <td><input name="{{ key }}[new][name]" placeholder="Add new…"></td>
+              <td><input name="{{ key }}[new][name]" placeholder="Add new..."></td>
               <td><input name="{{ key }}[new][repo]" placeholder="org/repo"></td>
               <td>
                 <select name="{{ key }}[new][visibility]">
@@ -182,7 +149,7 @@ body {
               <td><input name="{{ key }}[new][deploy]" placeholder="e.g. vercel / netlify"></td>
               <td><textarea name="{{ key }}[new][desc]" placeholder="Short description"></textarea></td>
               <td>
-                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;align-items:start">
+                <div class="db-attrs">
                   <input type="text" placeholder="id" name="{{ key }}[new][db-attribute][id]" data-db-field disabled>
                   <input type="text" placeholder="title" name="{{ key }}[new][db-attribute][title]" data-db-field disabled>
                   <input type="text" placeholder="year" name="{{ key }}[new][db-attribute][year]" data-db-field disabled>
@@ -240,7 +207,7 @@ document.querySelectorAll('.filter').forEach(function(input){
     var tbody = document.getElementById(targetId);
     if(!tbody) return;
     var q = input.value.trim().toLowerCase();
-    tbody.querySelectorAll('tr').forEach(function(tr, i){
+    tbody.querySelectorAll('tr').forEach(function(tr){
       if(tr.classList.contains('new-row')) return;
       var text = tr.textContent.toLowerCase();
       tr.style.display = (q === '' || text.indexOf(q) !== -1) ? '' : 'none';
@@ -264,12 +231,16 @@ setTimeout(function(){ document.querySelectorAll('.toast').forEach(function(t){ 
 function toggleDbFieldsForRow(tr){
   var cb = tr.querySelector("input[type='checkbox'][name$='[sync-with-db]']");
   var checked = !!(cb && cb.checked);
+  // Enable/disable inputs and show/hide container
   tr.querySelectorAll('[data-db-field]').forEach(function(el){ el.disabled = !checked; if(!checked){ el.value=''; }});
+  var box = tr.querySelector('.db-attrs');
+  if(box){ box.style.display = checked ? 'grid' : 'none'; }
+  if(checked) tr.classList.add('row--sync'); else tr.classList.remove('row--sync');
 }
 
 function wireSyncToggles(scope){
   (scope || document).querySelectorAll("input[type='checkbox'][name$='[sync-with-db]']").forEach(function(cb){
-    cb.addEventListener('change', function(){ var tr=cb.closest('tr'); if(tr) toggleDbFieldsForRow(tr); });
+    cb.addEventListener('change', function(){ var tr = cb.closest('tr'); if(tr) toggleDbFieldsForRow(tr); });
   });
 }
 
@@ -278,6 +249,7 @@ wireSyncToggles(document);
 document.querySelectorAll('tbody tr').forEach(function(tr){ if(!tr.classList.contains('new-row')) toggleDbFieldsForRow(tr); });
 </script>
 """
+
 
 def load_data() -> dict[str, list[dict[str, Any]]]:
     return json.loads(DATA.read_text(encoding="utf-8"))
@@ -302,7 +274,6 @@ def normalize(rows: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
         if not item["name"]:
             continue
         if sync_flag:
-            # Use nested db-attribute payload
             db: dict[str, Any] = {}
             def _val(v: Any) -> Any:
                 if v is None:
@@ -320,11 +291,11 @@ def normalize(rows: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 @app.get("/")
-
 def index():
     data = load_data()
     visible_data = {k: v for k, v in data.items() if isinstance(v, list) and all(isinstance(r, dict) for r in v)}
     return render_template_string(TEMPLATE, data=visible_data)
+
 
 @app.post("/save")
 def save():
@@ -372,4 +343,5 @@ def save():
 
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=True) 
+    app.run(host="127.0.0.1", port=5000, debug=True)
+

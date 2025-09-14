@@ -1,0 +1,54 @@
+name: Vercel Deploy (via Actions)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: vercel-deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+  # Optional team context
+  VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID }}
+  VERCEL_TEAM_SLUG: ${{ secrets.VERCEL_TEAM_SLUG }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Vercel CLI
+        run: npm i -g vercel@latest
+
+      - name: Pull Vercel env (prod)
+        run: |
+          set -euo pipefail
+          SCOPE=""
+          if [ -n "${VERCEL_TEAM_SLUG:-}" ]; then SCOPE="--scope ${VERCEL_TEAM_SLUG}"; fi
+          vercel pull --yes --environment=production ${SCOPE} --token="${VERCEL_TOKEN}"
+
+      - name: Build (in CI)
+        run: |
+          set -euo pipefail
+          SCOPE=""
+          if [ -n "${VERCEL_TEAM_SLUG:-}" ]; then SCOPE="--scope ${VERCEL_TEAM_SLUG}"; fi
+          vercel build --prod ${SCOPE} --token="${VERCEL_TOKEN}"
+
+      - name: Deploy prebuilt output to Vercel
+        run: |
+          set -euo pipefail
+          SCOPE=""
+          if [ -n "${VERCEL_TEAM_SLUG:-}" ]; then SCOPE="--scope ${VERCEL_TEAM_SLUG}"; fi
+          vercel deploy --prebuilt --prod ${SCOPE} --token="${VERCEL_TOKEN}" 

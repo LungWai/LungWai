@@ -17,23 +17,62 @@ env:
   VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID }}
   VERCEL_TEAM_SLUG: ${{ secrets.VERCEL_TEAM_SLUG }}
 
-jobs:  deploy:    runs-on: ubuntu-latest    steps:      - uses: actions/checkout@v4      - name: Check required secrets        id: check        run: |          set -euo pipefail          missing=()          [ -z "${{ secrets.VERCEL_TOKEN }}" ] && missing+=(VERCEL_TOKEN)          [ -z "${{ secrets.VERCEL_ORG_ID }}" ] && missing+=(VERCEL_ORG_ID)          [ -z "${{ secrets.VERCEL_PROJECT_ID }}" ] && missing+=(VERCEL_PROJECT_ID)          if [ ${#missing[@]} -gt 0 ]; then            echo "Required secrets missing: ${missing[*]}"            echo "ok=false" >> "$GITHUB_OUTPUT"          else            echo "ok=true" >> "$GITHUB_OUTPUT"          fi      - name: Install Node        if: steps.check.outputs.ok == 'true'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required secrets
+        id: check
+        shell: bash
+        run: |
+          set -euo pipefail
+          missing=()
+          [[ -z "${{ secrets.VERCEL_TOKEN }}" ]] && missing+=(VERCEL_TOKEN)
+          [[ -z "${{ secrets.VERCEL_ORG_ID }}" ]] && missing+=(VERCEL_ORG_ID)
+          [[ -z "${{ secrets.VERCEL_PROJECT_ID }}" ]] && missing+=(VERCEL_PROJECT_ID)
+          if (( ${#missing[@]} > 0 )); then
+            echo "Required secrets missing: ${missing[*]}"
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install Node
+        if: steps.check.outputs.ok == 'true'
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20'
           cache: 'npm'
 
-            - name: Install Vercel CLI        if: steps.check.outputs.ok == 'true'        run: npm i -g vercel@latest      - name: Pull Vercel env (prod)        if: steps.check.outputs.ok == 'true'        run: |          set -euo pipefail
+      - name: Install Vercel CLI
+        if: steps.check.outputs.ok == 'true'
+        run: npm i -g vercel@latest
+
+      - name: Pull Vercel env (prod)
+        if: steps.check.outputs.ok == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
           SCOPE=""
           if [ -n "${VERCEL_TEAM_SLUG:-}" ]; then SCOPE="--scope ${VERCEL_TEAM_SLUG}"; fi
           vercel pull --yes --environment=production ${SCOPE} --token="${VERCEL_TOKEN}"
 
-            - name: Build (in CI)        if: steps.check.outputs.ok == 'true'        run: |          set -euo pipefail
+      - name: Build (in CI)
+        if: steps.check.outputs.ok == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
           SCOPE=""
           if [ -n "${VERCEL_TEAM_SLUG:-}" ]; then SCOPE="--scope ${VERCEL_TEAM_SLUG}"; fi
           vercel build --prod ${SCOPE} --token="${VERCEL_TOKEN}"
 
-            - name: Deploy prebuilt output to Vercel        if: steps.check.outputs.ok == 'true'        run: |          set -euo pipefail
+      - name: Deploy prebuilt output to Vercel
+        if: steps.check.outputs.ok == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
           SCOPE=""
           if [ -n "${VERCEL_TEAM_SLUG:-}" ]; then SCOPE="--scope ${VERCEL_TEAM_SLUG}"; fi
           vercel deploy --prebuilt --prod ${SCOPE} --token="${VERCEL_TOKEN}" 

@@ -63,6 +63,11 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubun
 /* Hide DB attributes until sync is enabled */
 .db-attrs{display:none;grid-template-columns:repeat(2,1fr);gap:6px;align-items:start}
 .row--sync .db-attrs{display:grid}
+/* Details panels toggle */
+.details-panels .panel-db{display:none}
+tr[data-details='db'] .details-panels .panel-db{display:block}
+tr[data-details='db'] .details-panels .panel-desc{display:none}
+.details-switch{display:inline-flex;margin-bottom:6px}
 @media (max-width:800px){.page-title{font-size:20px}.section-header{flex-direction:column;align-items:stretch;gap:8px}.filter{width:100%}.table thead th{top:92px}}
 </style>
 
@@ -99,15 +104,14 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubun
               <th>repo</th>
               <th>visibility</th>
               <th>deploy</th>
-              <th>desc</th>
-              <th>db-attribute</th>
-              <th>sync-with-db</th>
+              <th>details</th>
+              <th>sync</th>
               <th>remove</th>
             </tr>
           </thead>
           <tbody id="tbody-{{ key }}">
             {% for idx, row in enumerate(rows) %}
-            <tr class="{% if row.get('sync-with-db') %}row--sync{% endif %}">
+            <tr data-details="{{ 'db' if row.get('sync-with-db') else 'desc' }}">
               <td><input name="{{ key }}[{{ idx }}][name]" value="{{ row.get('name','') }}" required></td>
               <td><input name="{{ key }}[{{ idx }}][repo]" value="{{ row.get('repo','') }}"></td>
               <td>
@@ -119,24 +123,40 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubun
                 <span class="badge {% if vis=='private' %}badge-private{% else %}badge-public{% endif %}">{{ vis }}</span>
               </td>
               <td><input name="{{ key }}[{{ idx }}][deploy]" value="{{ row.get('deploy','') }}"></td>
-              <td><textarea name="{{ key }}[{{ idx }}][desc]">{{ row.get('desc','') }}</textarea></td>
               <td>
-                <div class="db-attrs">
-                  <input type="text" placeholder="id" name="{{ key }}[{{ idx }}][db-attribute][id]" value="{{ (row.get('db-attribute') or {}).get('id','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
-                  <input type="text" placeholder="title" name="{{ key }}[{{ idx }}][db-attribute][title]" value="{{ (row.get('db-attribute') or {}).get('title','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
-                  <input type="text" placeholder="year" name="{{ key }}[{{ idx }}][db-attribute][year]" value="{{ (row.get('db-attribute') or {}).get('year','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
-                  <input type="text" placeholder="image" name="{{ key }}[{{ idx }}][db-attribute][image]" value="{{ (row.get('db-attribute') or {}).get('image','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
-                  <input type="text" placeholder="preview_image" name="{{ key }}[{{ idx }}][db-attribute][preview_image]" value="{{ (row.get('db-attribute') or {}).get('preview_image','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
-                  <input type="text" placeholder="url" name="{{ key }}[{{ idx }}][db-attribute][url]" value="{{ (row.get('db-attribute') or {}).get('url','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
-                  <input type="text" placeholder="category" name="{{ key }}[{{ idx }}][db-attribute][category]" value="{{ (row.get('db-attribute') or {}).get('category','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
-                  <textarea placeholder="description" name="{{ key }}[{{ idx }}][db-attribute][description]" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>{{ (row.get('db-attribute') or {}).get('description','') }}</textarea>
+                <div class="details-switch segmented">
+                  <label class="seg-item">
+                    <input type="radio" name="details-{{ key }}-{{ idx }}" value="desc" {% if not row.get('sync-with-db') %}checked{% endif %}>
+                    <span>desc</span>
+                  </label>
+                  <label class="seg-item">
+                    <input type="radio" name="details-{{ key }}-{{ idx }}" value="db" {% if row.get('sync-with-db') %}checked{% endif %}>
+                    <span>db</span>
+                  </label>
+                </div>
+                <div class="details-panels">
+                  <div class="panel-desc">
+                    <textarea name="{{ key }}[{{ idx }}][desc]">{{ row.get('desc','') }}</textarea>
+                  </div>
+                  <div class="panel-db">
+                    <div class="db-attrs">
+                      <input type="text" placeholder="id" name="{{ key }}[{{ idx }}][db-attribute][id]" value="{{ (row.get('db-attribute') or {}).get('id','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                      <input type="text" placeholder="title" name="{{ key }}[{{ idx }}][db-attribute][title]" value="{{ (row.get('db-attribute') or {}).get('title','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                      <input type="text" placeholder="year" name="{{ key }}[{{ idx }}][db-attribute][year]" value="{{ (row.get('db-attribute') or {}).get('year','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                      <input type="text" placeholder="image" name="{{ key }}[{{ idx }}][db-attribute][image]" value="{{ (row.get('db-attribute') or {}).get('image','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                      <input type="text" placeholder="preview_image" name="{{ key }}[{{ idx }}][db-attribute][preview_image]" value="{{ (row.get('db-attribute') or {}).get('preview_image','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                      <input type="text" placeholder="url" name="{{ key }}[{{ idx }}][db-attribute][url]" value="{{ (row.get('db-attribute') or {}).get('url','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                      <input type="text" placeholder="category" name="{{ key }}[{{ idx }}][db-attribute][category]" value="{{ (row.get('db-attribute') or {}).get('category','') }}" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>
+                      <textarea placeholder="description" name="{{ key }}[{{ idx }}][db-attribute][description]" data-db-field {% if not row.get('sync-with-db') %}disabled{% endif %}>{{ (row.get('db-attribute') or {}).get('description','') }}</textarea>
+                    </div>
+                  </div>
                 </div>
               </td>
-              <td><input type="checkbox" name="{{ key }}[{{ idx }}][sync-with-db]" {% if row.get('sync-with-db') %}checked{% endif %}></td>
+              <td><input type="checkbox" name="{{ key }}[{{ idx }}][sync-with-db]" {% if row.get('sync-with-db') %}checked{% endif %} data-sync></td>
               <td><input type="checkbox" name="{{ key }}[{{ idx }}][_remove]"></td>
             </tr>
             {% endfor %}
-            <tr class="new-row">
+            <tr class="new-row" data-details="desc">
               <td><input name="{{ key }}[new][name]" placeholder="Add new..."></td>
               <td><input name="{{ key }}[new][repo]" placeholder="org/repo"></td>
               <td>
@@ -147,20 +167,36 @@ body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Ubun
                 <span class="badge badge-public">public</span>
               </td>
               <td><input name="{{ key }}[new][deploy]" placeholder="e.g. vercel / netlify"></td>
-              <td><textarea name="{{ key }}[new][desc]" placeholder="Short description"></textarea></td>
               <td>
-                <div class="db-attrs">
-                  <input type="text" placeholder="id" name="{{ key }}[new][db-attribute][id]" data-db-field disabled>
-                  <input type="text" placeholder="title" name="{{ key }}[new][db-attribute][title]" data-db-field disabled>
-                  <input type="text" placeholder="year" name="{{ key }}[new][db-attribute][year]" data-db-field disabled>
-                  <input type="text" placeholder="image" name="{{ key }}[new][db-attribute][image]" data-db-field disabled>
-                  <input type="text" placeholder="preview_image" name="{{ key }}[new][db-attribute][preview_image]" data-db-field disabled>
-                  <input type="text" placeholder="url" name="{{ key }}[new][db-attribute][url]" data-db-field disabled>
-                  <input type="text" placeholder="category" name="{{ key }}[new][db-attribute][category]" data-db-field disabled>
-                  <textarea placeholder="description" name="{{ key }}[new][db-attribute][description]" data-db-field disabled></textarea>
+                <div class="details-switch segmented">
+                  <label class="seg-item">
+                    <input type="radio" name="details-{{ key }}-new" value="desc" checked>
+                    <span>desc</span>
+                  </label>
+                  <label class="seg-item">
+                    <input type="radio" name="details-{{ key }}-new" value="db">
+                    <span>db</span>
+                  </label>
+                </div>
+                <div class="details-panels">
+                  <div class="panel-desc">
+                    <textarea name="{{ key }}[new][desc]" placeholder="Short description"></textarea>
+                  </div>
+                  <div class="panel-db">
+                    <div class="db-attrs">
+                      <input type="text" placeholder="id" name="{{ key }}[new][db-attribute][id]" data-db-field disabled>
+                      <input type="text" placeholder="title" name="{{ key }}[new][db-attribute][title]" data-db-field disabled>
+                      <input type="text" placeholder="year" name="{{ key }}[new][db-attribute][year]" data-db-field disabled>
+                      <input type="text" placeholder="image" name="{{ key }}[new][db-attribute][image]" data-db-field disabled>
+                      <input type="text" placeholder="preview_image" name="{{ key }}[new][db-attribute][preview_image]" data-db-field disabled>
+                      <input type="text" placeholder="url" name="{{ key }}[new][db-attribute][url]" data-db-field disabled>
+                      <input type="text" placeholder="category" name="{{ key }}[new][db-attribute][category]" data-db-field disabled>
+                      <textarea placeholder="description" name="{{ key }}[new][db-attribute][description]" data-db-field disabled></textarea>
+                    </div>
+                  </div>
                 </div>
               </td>
-              <td><input type="checkbox" name="{{ key }}[new][sync-with-db]"></td>
+              <td><input type="checkbox" name="{{ key }}[new][sync-with-db]" data-sync></td>
               <td></td>
             </tr>
           </tbody>
@@ -229,23 +265,39 @@ document.querySelectorAll('[data-collapse]').forEach(function(btn){
 setTimeout(function(){ document.querySelectorAll('.toast').forEach(function(t){ t.classList.remove('show'); t.style.opacity = 0; }); }, 3500);
 
 function toggleDbFieldsForRow(tr){
-  var cb = tr.querySelector("input[type='checkbox'][name$='[sync-with-db]']");
+  var cb = tr.querySelector("input[type='checkbox'][data-sync]");
   var checked = !!(cb && cb.checked);
   // Enable/disable inputs and show/hide container
   tr.querySelectorAll('[data-db-field]').forEach(function(el){ el.disabled = !checked; if(!checked){ el.value=''; }});
   var box = tr.querySelector('.db-attrs');
   if(box){ box.style.display = checked ? 'grid' : 'none'; }
-  if(checked) tr.classList.add('row--sync'); else tr.classList.remove('row--sync');
+  // Force details view alignment
+  var rDesc = tr.querySelector('.details-switch input[value="desc"]');
+  var rDb = tr.querySelector('.details-switch input[value="db"]');
+  if(checked && rDb){ rDb.checked = true; }
+  if(!checked && rDesc){ rDesc.checked = true; }
+  tr.setAttribute('data-details', checked ? 'db' : 'desc');
 }
 
 function wireSyncToggles(scope){
-  (scope || document).querySelectorAll("input[type='checkbox'][name$='[sync-with-db]']").forEach(function(cb){
+  (scope || document).querySelectorAll("input[type='checkbox'][data-sync]").forEach(function(cb){
     cb.addEventListener('change', function(){ var tr = cb.closest('tr'); if(tr) toggleDbFieldsForRow(tr); });
+  });
+}
+
+function wireDetailsSwitches(scope){
+  (scope || document).querySelectorAll('.details-switch input[type="radio"]').forEach(function(r){
+    r.addEventListener('change', function(){
+      var tr = r.closest('tr'); if(!tr) return;
+      var value = r.value === 'db' ? 'db' : 'desc';
+      tr.setAttribute('data-details', value);
+    });
   });
 }
 
 // Init
 wireSyncToggles(document);
+wireDetailsSwitches(document);
 document.querySelectorAll('tbody tr').forEach(function(tr){ if(!tr.classList.contains('new-row')) toggleDbFieldsForRow(tr); });
 </script>
 """

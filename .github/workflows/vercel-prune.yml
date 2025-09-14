@@ -9,6 +9,7 @@ env:
   VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
   VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID }}
+  VERCEL_TEAM_SLUG: ${{ secrets.VERCEL_TEAM_SLUG }}
 
 jobs:
   prune:
@@ -16,12 +17,13 @@ jobs:
     steps:
       - name: Check required secrets
         id: check
+        shell: bash
         run: |
           set -euo pipefail
           missing=()
-          [ -z "${{ secrets.VERCEL_TOKEN }}" ] && missing+=(VERCEL_TOKEN)
-          [ -z "${{ secrets.VERCEL_PROJECT_ID }}" ] && missing+=(VERCEL_PROJECT_ID)
-          if [ ${#missing[@]} -gt 0 ]; then
+          [[ -z "${{ secrets.VERCEL_TOKEN }}" ]] && missing+=(VERCEL_TOKEN)
+          [[ -z "${{ secrets.VERCEL_PROJECT_ID }}" ]] && missing+=(VERCEL_PROJECT_ID)
+          if (( ${#missing[@]} > 0 )); then
             echo "Required secrets missing: ${missing[*]}"
             echo "ok=false" >> "$GITHUB_OUTPUT"
           else
@@ -39,15 +41,32 @@ jobs:
           set -euo pipefail
           BASE="https://api.vercel.com"
           AUTH=( -H "Authorization: Bearer ${VERCEL_TOKEN}" )
-          q_team=""; [ -n "${VERCEL_TEAM_ID:-}" ] && q_team="&teamId=${VERCEL_TEAM_ID}"
+
+          # Resolve team id (if slug provided)
+          TEAM_ID="${VERCEL_TEAM_ID:-}"
+          if [ -z "$TEAM_ID" ] && [ -n "${VERCEL_TEAM_SLUG:-}" ]; then
+            TEAM_ID=$(curl -fsSL "${AUTH[@]}" "${BASE}/v2/teams?slug=${VERCEL_TEAM_SLUG}" | jq -r '.id // empty')
+          fi
+          q_team=""; [ -n "$TEAM_ID" ] && q_team="&teamId=${TEAM_ID}"
+
+          echo "Project: ${VERCEL_PROJECT_ID} | Keep: ${KEEP} | TeamID: ${TEAM_ID:-none}"
+
           prune () {
             target="$1"
             list_url="${BASE}/v6/deployments?projectId=${VERCEL_PROJECT_ID}&target=${target}&limit=200${q_team}"
+            echo "Listing ${target} deployments…"
             mapfile -t ids < <(curl -fsSL "${AUTH[@]}" "$list_url" \
               | jq -r '.deployments | sort_by(.createdAt) | reverse | .[] | select(.state=="READY") | .uid')
-            count=${#ids[@]}; (( count <= KEEP )) && { echo "Nothing to delete for ${target}"; return; }
+            count=${#ids[@]}
+            echo "Found ${count} READY ${target} deployments"
+            if (( count <= KEEP )); then
+              echo "Nothing to delete for ${target} (<= KEEP=${KEEP})"
+              return
+            fi
+            del_count=$(( count - KEEP ))
+            echo "Deleting ${del_count} ${target} deployments (keeping ${KEEP})"
             for uid in "${ids[@]:${KEEP}}"; do
-              del_url="${BASE}/v13/deployments/${uid}"; [ -n "${VERCEL_TEAM_ID:-}" ] && del_url="${del_url}?teamId=${VERCEL_TEAM_ID}"
+              del_url="${BASE}/v13/deployments/${uid}"; [ -n "$TEAM_ID" ] && del_url="${del_url}?teamId=${TEAM_ID}"
               echo "Deleting ${target} ${uid}"
               curl -fsS -X DELETE "${AUTH[@]}" "$del_url" > /dev/null
             done

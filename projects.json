@@ -67,7 +67,7 @@
       "repo": "https://github.com/LungWai/EarningFast",
       "visibility": "public",
       "deploy": "None",
-      "desc": "1",
+      "desc": "Auto-pipeline getting earning reports and schedule from us stocks",
       "sync-with-db": false
     },
     {

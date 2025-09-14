@@ -16,7 +16,26 @@ def _looks_like_github_slug(s: str) -> bool:
     return bool(re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", s.strip()))
 
 
-def _clean_url(url: str | None, *, for_repo: bool = False) -> str | None:    if url is None:        return None    s = str(url).strip()    if not s:        return None    # Strip common wrappers or prefixes accidentally pasted    if s.startswith('<') and s.endswith('>'):        s = s[1:-1].strip()    if s.startswith('@'):        s = s.lstrip('@').strip()    if s.lower() in {"none", "null", "n/a", "na", "-", "—", "#"}:        return None    if for_repo and _looks_like_github_slug(s):        return f"https://github.com/{s}"    if s.startswith(("http://", "https://", "mailto:", "tel:")):        return s    if s.startswith("//"):        return "https:" + s    return "https://" + s
+def _clean_url(url: str | None, *, for_repo: bool = False) -> str | None:
+    if url is None:
+        return None
+    s = str(url).strip()
+    if not s:
+        return None
+    # Strip common wrappers or prefixes accidentally pasted
+    if s.startswith('<') and s.endswith('>'):
+        s = s[1:-1].strip()
+    if s.startswith('@'):
+        s = s.lstrip('@').strip()
+    if s.lower() in {"none", "null", "n/a", "na", "-", "—", "#"}:
+        return None
+    if for_repo and _looks_like_github_slug(s):
+        return f"https://github.com/{s}"
+    if s.startswith(("http://", "https://", "mailto:", "tel:")):
+        return s
+    if s.startswith("//"):
+        return "https:" + s
+    return "https://" + s
 
 
 def link_or_text(url: str | None, text: str) -> str:

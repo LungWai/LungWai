@@ -34,10 +34,10 @@ Full‑stack developer building SaaS, dev tools, and ML experiments.
       <tbody>
         <!-- GENERATED: SAAS_COMPLETED START (edit in LungWai/projects.json) -->
         <tr><td><a href="https://github.com/LungWai/Githubuilder"><strong>Githubuilder</strong></a></td><td>🌐 Public</td><td><a href="https://www.githubuilder.com">site</a></td><td>An automated platform that streamlines repository creation and profile building</td></tr>
-        <tr><td><a href="https://github.com/LungWai/sw128lab"><strong>sw128lab</strong></a></td><td>🌐 Public</td><td>—</td><td>Home page for detailed application foresee and promotion</td></tr>
-        <tr><td><a href="https://github.com/LungWai/1000-saas"><strong>1000-saas</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/sw128lab"><strong>sw128lab</strong></a></td><td>🌐 Public</td><td><a href="https://www.sw128lab.xyz">site</a></td><td>Home page for detailed application foresee and promotion</td></tr>
+        <tr><td><a href="https://github.com/LungWai/1000-saas"><strong>1000-saas</strong></a></td><td>🌐 Public</td><td><a href="https://www.1000saas.xyz">site</a></td><td>—</td></tr>
         <tr><td><a href="https://github.com/LungWai/qrgen"><strong>qrgen</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/EarningFast"><strong>EarningFast</strong></a></td><td>🌐 Public</td><td>—</td><td>1</td></tr>
+        <tr><td><a href="https://github.com/LungWai/EarningFast"><strong>EarningFast</strong></a></td><td>🌐 Public</td><td>—</td><td>Auto-pipeline getting earning reports and schedule from us stocks</td></tr>
         <tr><td><a href="https://github.com/LungWai/outputCursorExtensionv2"><strong>outputCursorExtensionv2</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
         <!-- GENERATED: SAAS_COMPLETED END -->
       </tbody>

@@ -4,7 +4,9 @@ on:
   push:
     paths:
       - 'projects.json'
-      - 'LungWai/projects.json'
+  pull_request:
+    paths:
+      - 'projects.json'
   workflow_dispatch: {}
 
 permissions:
@@ -27,25 +29,26 @@ jobs:
       - name: Install deps
         run: |
           python -m pip install --upgrade pip
-          pip install -r LungWai/requirements.txt
+          pip install -r requirements.txt
 
       - name: Regenerate README
         run: |
-          python LungWai/generate_readme.py
+          python generate_readme.py
 
       - name: Sync Neon DB (or write mirror JSON)
         env:
           NEON_DATABASE_URL: ${{ secrets.NEON_DATABASE_URL }}
           NEON_TABLE: ${{ secrets.NEON_TABLE }}
         run: |
-          python LungWai/sync_neon_db.py || true
+          python sync_neon_db.py || true
 
       - name: Commit changes
+        if: ${{ github.event_name == 'push' }}
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add readme.md LungWai/db_products.json || true
+            git add readme.md db_products.json || true
             git commit -m "chore: regenerate README and sync Neon (mirror if no DB)"
             git push
           else

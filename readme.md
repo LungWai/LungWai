@@ -63,13 +63,13 @@ Full‑stack developer building SaaS, dev tools, and ML experiments.
       </thead>
           <tbody>
       <!-- GENERATED: SAAS_IN_PROGRESS START (edit in LungWai/projects.json) -->
-        <tr><td><a href="https://github.com/LungWai/easystatement"><strong>easystatement</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/salary-estimator"><strong>salary-estimator</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/mcp-notification-server"><strong>mcp-notification-server</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/winpreview"><strong>winpreview</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/trendSite2"><strong>trendSite2</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/mcpfast"><strong>mcpfast</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/draw-and-guess"><strong>draw-and-guess</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/easystatement"><strong>easystatement</strong></a></td><td>🌐 Public</td><td>—</td><td>banking and E-statemnet management tools with leverage of visual LLM</td></tr>
+        <tr><td><a href="https://github.com/LungWai/salary-estimator"><strong>salary-estimator</strong></a></td><td>🌐 Public</td><td>—</td><td>Salary estimator with use of</td></tr>
+        <tr><td><a href="https://github.com/LungWai/mcp-notification-server"><strong>mcp-notification-server</strong></a></td><td>🌐 Public</td><td>—</td><td>MCP server that can help notify user with integration to social media</td></tr>
+        <tr><td><a href="https://github.com/LungWai/winpreview"><strong>winpreview</strong></a></td><td>🌐 Public</td><td>—</td><td>Windows preview image app</td></tr>
+        <tr><td><a href="https://github.com/LungWai/trendSite2"><strong>trendSite2</strong></a></td><td>🌐 Public</td><td>—</td><td>Site for trending content</td></tr>
+        <tr><td><a href="https://github.com/LungWai/mcpfast"><strong>mcpfast</strong></a></td><td>🌐 Public</td><td>—</td><td>Boilerplate for fast mcp servers assemblying</td></tr>
+        <tr><td><a href="https://github.com/LungWai/draw-and-guess"><strong>draw-and-guess</strong></a></td><td>🌐 Public</td><td>—</td><td>Draw-and-guess games for ios and android</td></tr>
         <tr><td><a href="https://github.com/LungWai/memecoinfast"><strong>memecoinfast</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
         <tr><td><a href="https://github.com/LungWai/sideView2"><strong>sideView2</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
         <tr><td><a href="https://github.com/LungWai/personalprompt"><strong>personalprompt</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>

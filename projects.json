@@ -49,7 +49,7 @@
       "repo": "https://github.com/LungWai/qrgen",
       "visibility": "public",
       "deploy": "None",
-      "desc": "",
+      "desc": "Generate beautiful QRCode with help of ComfyUI",
       "sync-with-db": true,
       "db-attribute": {
         "id": "product-2",
@@ -75,7 +75,7 @@
       "repo": "https://github.com/LungWai/outputCursorExtensionv2",
       "visibility": "public",
       "deploy": "None",
-      "desc": "",
+      "desc": "Extension for vibe coding IDE Cursor, on LLM response management",
       "sync-with-db": false
     }
   ],

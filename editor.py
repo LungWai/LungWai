@@ -307,6 +307,28 @@ def load_data() -> dict[str, list[dict[str, Any]]]:
     return json.loads(DATA.read_text(encoding="utf-8"))
 
 
+def _looks_like_github_slug(s: str) -> bool:
+    import re as _re
+    return bool(_re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", s.strip()))
+
+
+def _clean_url(url: Any, *, for_repo: bool = False) -> str | None:
+    if url is None:
+        return None
+    s = str(url).strip()
+    if not s:
+        return None
+    if s.lower() in {"none", "null", "n/a", "na", "-", "—", "#"}:
+        return None
+    if for_repo and _looks_like_github_slug(s):
+        return f"https://github.com/{s}"
+    if s.startswith(("http://", "https://", "mailto:", "tel:")):
+        return s
+    if s.startswith("//"):
+        return "https:" + s
+    return "https://" + s
+
+
 def normalize(rows: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     cleaned: list[dict[str, Any]] = []
     for key, row in rows.items():
@@ -317,9 +339,9 @@ def normalize(rows: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
         sync_flag = bool(row.get("sync-with-db"))
         item: dict[str, Any] = {
             "name": row.get("name", "").strip(),
-            "repo": row.get("repo") or None,
+            "repo": _clean_url(row.get("repo"), for_repo=True),
             "visibility": (row.get("visibility") or "public").strip().lower(),
-            "deploy": row.get("deploy") or None,
+            "deploy": _clean_url(row.get("deploy")),
             "desc": row.get("desc", "").strip(),
             "sync-with-db": sync_flag,
         }

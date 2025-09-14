@@ -11,16 +11,26 @@ VIS_ICON = {
     "private": "🔒 Private",
 }
 
+
+def _looks_like_github_slug(s: str) -> bool:
+    return bool(re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", s.strip()))
+
+
+def _clean_url(url: str | None, *, for_repo: bool = False) -> str | None:    if url is None:        return None    s = str(url).strip()    if not s:        return None    # Strip common wrappers or prefixes accidentally pasted    if s.startswith('<') and s.endswith('>'):        s = s[1:-1].strip()    if s.startswith('@'):        s = s.lstrip('@').strip()    if s.lower() in {"none", "null", "n/a", "na", "-", "—", "#"}:        return None    if for_repo and _looks_like_github_slug(s):        return f"https://github.com/{s}"    if s.startswith(("http://", "https://", "mailto:", "tel:")):        return s    if s.startswith("//"):        return "https:" + s    return "https://" + s
+
+
 def link_or_text(url: str | None, text: str) -> str:
-    if not url:
+    cleaned = _clean_url(url)
+    if not cleaned:
         return "—"
-    return f'<a href="{url}">{text}</a>'
+    return f'<a href="{cleaned}">{text}</a>'
+
 
 
 def render_row(project: dict) -> str:
     name = project.get("name", "")
-    repo = project.get("repo")
-    deploy = project.get("deploy")
+    repo = _clean_url(project.get("repo"), for_repo=True)
+    deploy = _clean_url(project.get("deploy"))
     desc = project.get("desc", "") or "—"
     visibility = project.get("visibility", "public").lower()
     vis = VIS_ICON.get(visibility, "🌐 Public")
@@ -29,8 +39,10 @@ def render_row(project: dict) -> str:
     return f"        <tr><td>{project_cell}</td><td>{vis}</td><td>{deploy_cell}</td><td>{desc}</td></tr>"
 
 
+
 def render_section(items: list[dict]) -> str:
     return "\n".join(render_row(p) for p in items)
+
 
 
 def replace_block(text: str, key: str, replacement: str) -> str:
@@ -38,6 +50,7 @@ def replace_block(text: str, key: str, replacement: str) -> str:
     end = f"<!-- GENERATED: {key} END -->"
     pattern = re.compile(rf"({re.escape(start)})(.*?){re.escape(end)}", re.DOTALL)
     return pattern.sub(lambda m: f"{m.group(1)}\n{replacement}\n        {end}", text)
+
 
 
 def main() -> None:

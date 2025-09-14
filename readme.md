@@ -33,12 +33,12 @@ Full‑stack developer building SaaS, dev tools, and ML experiments.
       </thead>
       <tbody>
         <!-- GENERATED: SAAS_COMPLETED START (edit in LungWai/projects.json) -->
-        <tr><td><a href="https://github.com/LungWai/Githubuilder"><strong>Githubuilder</strong></a></td><td>🌐 Public</td><td><a href="www.githubuilder.com">site</a></td><td>An automated platform that streamlines repository creation and profile building</td></tr>
-        <tr><td><a href="https://github.com/LungWai/sw128lab"><strong>sw128lab</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>1</td></tr>
-        <tr><td><a href="https://github.com/LungWai/1000-saas"><strong>1000-saas</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/qrgen"><strong>qrgen</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/EarningFast"><strong>EarningFast</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>1</td></tr>
-        <tr><td><a href="https://github.com/LungWai/outputCursorExtensionv2"><strong>outputCursorExtensionv2</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/Githubuilder"><strong>Githubuilder</strong></a></td><td>🌐 Public</td><td><a href="https://www.githubuilder.com">site</a></td><td>An automated platform that streamlines repository creation and profile building</td></tr>
+        <tr><td><a href="https://github.com/LungWai/sw128lab"><strong>sw128lab</strong></a></td><td>🌐 Public</td><td>—</td><td>1</td></tr>
+        <tr><td><a href="https://github.com/LungWai/1000-saas"><strong>1000-saas</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/qrgen"><strong>qrgen</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/EarningFast"><strong>EarningFast</strong></a></td><td>🌐 Public</td><td>—</td><td>1</td></tr>
+        <tr><td><a href="https://github.com/LungWai/outputCursorExtensionv2"><strong>outputCursorExtensionv2</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
         <!-- GENERATED: SAAS_COMPLETED END -->
       </tbody>
     </table>
@@ -63,20 +63,20 @@ Full‑stack developer building SaaS, dev tools, and ML experiments.
       </thead>
           <tbody>
       <!-- GENERATED: SAAS_IN_PROGRESS START (edit in LungWai/projects.json) -->
-        <tr><td><a href="https://github.com/LungWai/easystatement"><strong>easystatement</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/salary-estimator"><strong>salary-estimator</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/mcp-notification-server"><strong>mcp-notification-server</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/winpreview"><strong>winpreview</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/trendSite2"><strong>trendSite2</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/mcpfast"><strong>mcpfast</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/draw-and-guess"><strong>draw-and-guess</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/memecoinfast"><strong>memecoinfast</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/sideView2"><strong>sideView2</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/personalprompt"><strong>personalprompt</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/simple-licensing-module"><strong>simple-licensing-module</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/project-bolt-flood-puzzle"><strong>project-bolt-flood-puzzle</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/project-bolt-aiImageDetector"><strong>project-bolt-aiImageDetector</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/ChatAppTemplate"><strong>ChatAppTemplate</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/easystatement"><strong>easystatement</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/salary-estimator"><strong>salary-estimator</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/mcp-notification-server"><strong>mcp-notification-server</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/winpreview"><strong>winpreview</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/trendSite2"><strong>trendSite2</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/mcpfast"><strong>mcpfast</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/draw-and-guess"><strong>draw-and-guess</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/memecoinfast"><strong>memecoinfast</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/sideView2"><strong>sideView2</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/personalprompt"><strong>personalprompt</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/simple-licensing-module"><strong>simple-licensing-module</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/project-bolt-flood-puzzle"><strong>project-bolt-flood-puzzle</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/project-bolt-aiImageDetector"><strong>project-bolt-aiImageDetector</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/ChatAppTemplate"><strong>ChatAppTemplate</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
         <!-- GENERATED: SAAS_IN_PROGRESS END -->
     </tbody>
     </table>
@@ -103,21 +103,21 @@ Full‑stack developer building SaaS, dev tools, and ML experiments.
     </thead>
     <tbody>
       <!-- GENERATED: DEV_TOOLS START (edit in LungWai/projects.json) -->
-        <tr><td><a href="https://github.com/LungWai/jobfinder"><strong>jobfinder</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/rclone"><strong>rclone</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/vm-tools"><strong>vm-tools</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/2FAuth"><strong>2FAuth</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/userscript-series"><strong>userscript-series</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/L2do-export"><strong>L2do-export</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/tgcrawl"><strong>tgcrawl</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/datastruct-visualizer"><strong>datastruct-visualizer</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/markdown2webpage"><strong>markdown2webpage</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/boltnew2api"><strong>boltnew2api</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/OutlookManager"><strong>OutlookManager</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/new-api"><strong>new-api</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/gemini-balance"><strong>gemini-balance</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/Song-downloader"><strong>Song-downloader</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/youtubeDL"><strong>youtubeDL</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/jobfinder"><strong>jobfinder</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/rclone"><strong>rclone</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/vm-tools"><strong>vm-tools</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/2FAuth"><strong>2FAuth</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/userscript-series"><strong>userscript-series</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/L2do-export"><strong>L2do-export</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/tgcrawl"><strong>tgcrawl</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/datastruct-visualizer"><strong>datastruct-visualizer</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/markdown2webpage"><strong>markdown2webpage</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/boltnew2api"><strong>boltnew2api</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/OutlookManager"><strong>OutlookManager</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/new-api"><strong>new-api</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/gemini-balance"><strong>gemini-balance</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/Song-downloader"><strong>Song-downloader</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/youtubeDL"><strong>youtubeDL</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
         <!-- GENERATED: DEV_TOOLS END -->
     </tbody>
   </table>
@@ -143,14 +143,14 @@ Full‑stack developer building SaaS, dev tools, and ML experiments.
     </thead>
     <tbody>
       <!-- GENERATED: FUN_PROJECTS START (edit in LungWai/projects.json) -->
-        <tr><td><a href="https://github.com/LungWai/Love-letter"><strong>Love-letter</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/vid-promptor"><strong>vid-promptor</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/userscript2extension"><strong>userscript2extension</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/cloth-sell"><strong>cloth-sell</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="None"><strong>indi-selling-large</strong></a></td><td>🔒 Private</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/ngo-site"><strong>ngo-site</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/llm-poison"><strong>llm-poison</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/debridDownloader"><strong>debridDownloader</strong></a></td><td>🌐 Public</td><td><a href="None">site</a></td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/Love-letter"><strong>Love-letter</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/vid-promptor"><strong>vid-promptor</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/userscript2extension"><strong>userscript2extension</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/cloth-sell"><strong>cloth-sell</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>indi-selling-large</strong></td><td>🔒 Private</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/ngo-site"><strong>ngo-site</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/llm-poison"><strong>llm-poison</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/debridDownloader"><strong>debridDownloader</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
         <!-- GENERATED: FUN_PROJECTS END -->
     </tbody>
   </table>

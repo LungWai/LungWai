@@ -4,8 +4,8 @@
       "name": "Githubuilder",
       "repo": "https://github.com/LungWai/Githubuilder",
       "visibility": "public",
-      "deploy": "None",
-      "desc": "111",
+      "deploy": "www.githubuilder.com",
+      "desc": "An automated platform that streamlines repository creation and profile building",
       "sync-with-db": true,
       "db-attribute": {
         "id": "product-1",
@@ -23,18 +23,8 @@
       "repo": "https://github.com/LungWai/sw128lab",
       "visibility": "public",
       "deploy": "None",
-      "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "desc": "1",
+      "sync-with-db": false
     },
     {
       "name": "1000-saas",
@@ -78,17 +68,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "outputCursorExtensionv2",
@@ -96,17 +76,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     }
   ],
   "saas_in_progress": [
@@ -134,17 +104,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "mcp-notification-server",
@@ -152,17 +112,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "winpreview",
@@ -170,17 +120,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "trendSite2",
@@ -188,17 +128,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "mcpfast",
@@ -206,17 +136,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "draw-and-guess",
@@ -224,17 +144,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "memecoinfast",
@@ -242,17 +152,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "sideView2",
@@ -260,17 +160,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "personalprompt",
@@ -278,17 +168,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "simple-licensing-module",
@@ -296,17 +176,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "project-bolt-flood-puzzle",
@@ -314,17 +184,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "project-bolt-aiImageDetector",
@@ -332,17 +192,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "ChatAppTemplate",
@@ -350,17 +200,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     }
   ],
   "dev_tools": [
@@ -370,17 +210,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "rclone",
@@ -388,17 +218,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "vm-tools",
@@ -406,17 +226,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "2FAuth",
@@ -424,17 +234,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "userscript-series",
@@ -442,17 +242,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "L2do-export",
@@ -460,17 +250,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "tgcrawl",
@@ -478,17 +258,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "datastruct-visualizer",
@@ -496,17 +266,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "markdown2webpage",
@@ -514,17 +274,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "boltnew2api",
@@ -532,17 +282,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "OutlookManager",
@@ -550,17 +290,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "new-api",
@@ -568,17 +298,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "gemini-balance",
@@ -586,17 +306,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "Song-downloader",
@@ -604,17 +314,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "youtubeDL",
@@ -622,17 +322,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     }
   ],
   "fun_projects": [
@@ -642,17 +332,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "vid-promptor",
@@ -660,17 +340,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "userscript2extension",
@@ -678,17 +348,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "cloth-sell",
@@ -696,17 +356,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "indi-selling-large",
@@ -714,17 +364,7 @@
       "visibility": "private",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "ngo-site",
@@ -732,17 +372,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "llm-poison",
@@ -750,17 +380,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     },
     {
       "name": "debridDownloader",
@@ -768,29 +388,7 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false,
-      "db-attribute": {
-        "id": "",
-        "title": "",
-        "year": "",
-        "description": "",
-        "image": "",
-        "preview_image": "",
-        "url": "",
-        "category": ""
-      }
+      "sync-with-db": false
     }
-  ],
-  "_db_products_attributes": [
-    "id",
-    "title",
-    "year",
-    "description",
-    "image",
-    "preview_image",
-    "url",
-    "category",
-    "created_at",
-    "updated_at"
   ]
 }

@@ -10,10 +10,30 @@ env:
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
   VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID }}
 
-jobs:  prune:    if: ${{ secrets.VERCEL_TOKEN != '' && secrets.VERCEL_PROJECT_ID != '' }}    runs-on: ubuntu-latest    steps:      - name: Install jq
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check required secrets
+        id: check
+        run: |
+          set -euo pipefail
+          missing=()
+          [ -z "${{ secrets.VERCEL_TOKEN }}" ] && missing+=(VERCEL_TOKEN)
+          [ -z "${{ secrets.VERCEL_PROJECT_ID }}" ] && missing+=(VERCEL_PROJECT_ID)
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "Required secrets missing: ${missing[*]}"
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install jq
+        if: steps.check.outputs.ok == 'true'
         run: sudo apt-get update && sudo apt-get install -y jq
 
       - name: Delete deployments beyond last ${{ env.KEEP }}
+        if: steps.check.outputs.ok == 'true'
         shell: bash
         run: |
           set -euo pipefail

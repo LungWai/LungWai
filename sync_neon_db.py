@@ -95,6 +95,32 @@ def _write_json_mirror(records: Iterable[dict[str, Any]]) -> None:
     print(f"Wrote {len(serializable)} rows to {JSON_MIRROR} (mirror mode)")
 
 
+def _normalize_neon_dsn(raw: str) -> str:
+    """Normalize NEON_DATABASE_URL values copied from dashboards or CLI.
+
+    Accepts:
+    - postgres/postgresql URI: postgresql://user:pass@host:port/db?sslmode=require
+    - accidentally copied `psql <uri>` strings (strips the leading `psql`)
+    - quoted values (strips single/double quotes)
+    """
+    s = (raw or "").strip()
+    if not s:
+        return s
+    # Strip surrounding quotes
+    if (s.startswith("'") and s.endswith("'")) or (s.startswith('"') and s.endswith('"')):
+        s = s[1:-1].strip()
+    # Remove leading `psql` command if present
+    if s.lower().startswith("psql "):
+        s = s.split(None, 1)[1].strip()
+    # If a full command was pasted, extract the URI portion
+    for scheme in ("postgresql://", "postgres://"):
+        idx = s.find(scheme)
+        if idx != -1:
+            s = s[idx:].strip()
+            break
+    return s
+
+
 def _sync_neon(records: Iterable[dict[str, Any]], dsn: str, table: str) -> None:
     # Import locally so the script can run in mirror mode without psycopg installed
     import psycopg
@@ -157,7 +183,8 @@ def _sync_neon(records: Iterable[dict[str, Any]], dsn: str, table: str) -> None:
 def main() -> None:
     records = _prepare_records()
 
-    dsn = os.getenv("NEON_DATABASE_URL", "").strip()
+    raw_dsn = os.getenv("NEON_DATABASE_URL", "").strip()
+    dsn = _normalize_neon_dsn(raw_dsn)
     table = (os.getenv("NEON_TABLE") or DEFAULT_TABLE_NAME).strip()
 
     if not dsn:

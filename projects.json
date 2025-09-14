@@ -3,7 +3,7 @@
     {
       "name": "Githubuilder",
       "repo": "https://github.com/LungWai/Githubuilder",
-      "visibility": "public",
+      "visibility": "private",
       "deploy": "www.githubuilder.com",
       "desc": "An automated platform that streamlines repository creation and profile building",
       "sync-with-db": true,
@@ -21,7 +21,7 @@
     {
       "name": "sw128lab",
       "repo": "https://github.com/LungWai/sw128lab",
-      "visibility": "public",
+      "visibility": "private",
       "deploy": "www.sw128lab.xyz",
       "desc": "Home page for detailed application foresee and promotion",
       "sync-with-db": false
@@ -29,9 +29,9 @@
     {
       "name": "1000-saas",
       "repo": "https://github.com/LungWai/1000-saas",
-      "visibility": "public",
+      "visibility": "private",
       "deploy": "www.1000saas.xyz",
-      "desc": "",
+      "desc": "Centralized and steady traffic digital space for promotion of interesting saas",
       "sync-with-db": true,
       "db-attribute": {
         "id": "product-3",

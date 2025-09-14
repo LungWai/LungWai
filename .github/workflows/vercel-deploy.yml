@@ -17,11 +17,7 @@ env:
   VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID }}
   VERCEL_TEAM_SLUG: ${{ secrets.VERCEL_TEAM_SLUG }}
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+jobs:  deploy:    if: ${{ secrets.VERCEL_TOKEN != '' && secrets.VERCEL_ORG_ID != '' && secrets.VERCEL_PROJECT_ID != '' }}    runs-on: ubuntu-latest    steps:      - uses: actions/checkout@v4
 
       - name: Install Node
         uses: actions/setup-node@v4

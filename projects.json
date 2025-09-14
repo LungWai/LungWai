@@ -85,7 +85,7 @@
       "repo": "https://github.com/LungWai/easystatement",
       "visibility": "public",
       "deploy": "None",
-      "desc": "",
+      "desc": "banking and E-statemnet management tools with leverage of visual LLM",
       "sync-with-db": true,
       "db-attribute": {
         "id": "product-4",
@@ -103,7 +103,7 @@
       "repo": "https://github.com/LungWai/salary-estimator",
       "visibility": "public",
       "deploy": "None",
-      "desc": "",
+      "desc": "Salary estimator with use of",
       "sync-with-db": false
     },
     {
@@ -111,7 +111,7 @@
       "repo": "https://github.com/LungWai/mcp-notification-server",
       "visibility": "public",
       "deploy": "None",
-      "desc": "",
+      "desc": "MCP server that can help notify user with integration to social media",
       "sync-with-db": false
     },
     {
@@ -119,7 +119,7 @@
       "repo": "https://github.com/LungWai/winpreview",
       "visibility": "public",
       "deploy": "None",
-      "desc": "",
+      "desc": "Windows preview image app",
       "sync-with-db": false
     },
     {
@@ -127,7 +127,7 @@
       "repo": "https://github.com/LungWai/trendSite2",
       "visibility": "public",
       "deploy": "None",
-      "desc": "",
+      "desc": "Site for trending content",
       "sync-with-db": false
     },
     {
@@ -135,7 +135,7 @@
       "repo": "https://github.com/LungWai/mcpfast",
       "visibility": "public",
       "deploy": "None",
-      "desc": "",
+      "desc": "Boilerplate for fast mcp servers assemblying",
       "sync-with-db": false
     },
     {
@@ -143,7 +143,7 @@
       "repo": "https://github.com/LungWai/draw-and-guess",
       "visibility": "public",
       "deploy": "None",
-      "desc": "",
+      "desc": "Draw-and-guess games for ios and android",
       "sync-with-db": false
     },
     {

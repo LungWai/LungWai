@@ -22,7 +22,7 @@
       "name": "sw128lab",
       "repo": "https://github.com/LungWai/sw128lab",
       "visibility": "public",
-      "deploy": "None",
+      "deploy": "www.sw128lab.xyz",
       "desc": "Home page for detailed application foresee and promotion",
       "sync-with-db": false
     },
@@ -30,7 +30,7 @@
       "name": "1000-saas",
       "repo": "https://github.com/LungWai/1000-saas",
       "visibility": "public",
-      "deploy": "None",
+      "deploy": "www.1000saas.xyz",
       "desc": "",
       "sync-with-db": true,
       "db-attribute": {

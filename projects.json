@@ -14,7 +14,7 @@
         "description": "An automated platform that streamlines repository creation and management on GitHub. The system handles branch configuration, workflow setup, and CI/CD pipeline initialization automatically.",
         "image": "/logos/github-builder.svg",
         "preview_image": "http://imgbed.sw128lab.xyz/file/1758010714978_chrome_N23L5bkmvt.png",
-        "url": "https://github.com",
+        "url": "https://www.githubuilder.com/",
         "category": "Development Tools"
       }
     },
@@ -35,12 +35,12 @@
       "sync-with-db": true,
       "db-attribute": {
         "id": "product-3",
-        "title": "1000saas.ai",
-        "year": "2025 Q3",
+        "title": "1000saas",
+        "year": "2025 Q1",
         "description": "A comprehensive platform that accelerates SaaS product development using AI-driven tools and templates. The system provides ready-to-use components and automated workflows to reduce development time.",
         "image": "/logos/1000saas-ai.svg",
         "preview_image": "https://picsum.photos/id/239/800/600",
-        "url": "https://1000saas.ai",
+        "url": "https://1000saas.xyz",
         "category": "Development Tools"
       }
     },
@@ -48,17 +48,17 @@
       "name": "qrgen",
       "repo": "https://github.com/LungWai/qrgen",
       "visibility": "public",
-      "deploy": "None",
+      "deploy": "qrgen.sw128lab.xyz",
       "desc": "Generate beautiful QRCode with help of ComfyUI",
       "sync-with-db": true,
       "db-attribute": {
         "id": "product-2",
         "title": "QRCode Gen",
-        "year": "2025 Q4",
-        "description": "A professional QR code management platform designed for enterprise-scale operations. The system enables batch processing with advanced customization options and provides detailed analytics for each QR code's performance.",
+        "year": "2025 Q1",
+        "description": "Generate beautiful QRCode with help of ComfyUI",
         "image": "/logos/qrcode-gen.svg",
         "preview_image": "https://picsum.photos/id/238/800/600",
-        "url": "https://example.com/qrcodegen",
+        "url": "https://qrgen.sw128lab.xyz",
         "category": "Business Tools"
       }
     },
@@ -84,7 +84,7 @@
       "name": "easystatement",
       "repo": "https://github.com/LungWai/easystatement",
       "visibility": "public",
-      "deploy": "None",
+      "deploy": "www.easy-statement.com",
       "desc": "banking and E-statemnet management tools with leverage of visual LLM",
       "sync-with-db": true,
       "db-attribute": {
@@ -94,7 +94,7 @@
         "description": "A modern solution for transforming traditional financial statements into interactive digital formats. The platform automatically extracts and categorizes financial data while maintaining compliance standards.",
         "image": "/logos/smart-estatement.svg",
         "preview_image": "https://picsum.photos/id/240/800/600",
-        "url": "https://example.com/smartestatement",
+        "url": "https://www.easy-statement.com",
         "category": "Business Tools"
       }
     },

@@ -112,7 +112,17 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "MCP server that can help notify user with integration to social media",
-      "sync-with-db": false
+      "sync-with-db": true,
+      "db-attribute": {
+        "id": "product-5",
+        "title": "MCP notification",
+        "year": "2025 Q4",
+        "description": "MCP server that can help notify user with integration to social media",
+        "image": "/logos/smart-estatement.svg",
+        "preview_image": "https://picsum.photos/id/240/800/600",
+        "url": "https://www.easy-statement.com",
+        "category": "Business Tools"
+      }
     },
     {
       "name": "winpreview",

@@ -36,7 +36,7 @@ Full‑stack developer building SaaS, dev tools, and ML experiments.
         <tr><td><a href="https://github.com/LungWai/Githubuilder"><strong>Githubuilder</strong></a></td><td>🔒 Private</td><td><a href="https://www.githubuilder.com">site</a></td><td>An automated platform that streamlines repository creation and profile building</td></tr>
         <tr><td><a href="https://github.com/LungWai/sw128lab"><strong>sw128lab</strong></a></td><td>🔒 Private</td><td><a href="https://www.sw128lab.xyz">site</a></td><td>Home page for detailed application foresee and promotion</td></tr>
         <tr><td><a href="https://github.com/LungWai/1000-saas"><strong>1000-saas</strong></a></td><td>🔒 Private</td><td><a href="https://www.1000saas.xyz">site</a></td><td>Centralized and steady traffic digital space for promotion of interesting saas</td></tr>
-        <tr><td><a href="https://github.com/LungWai/qrgen"><strong>qrgen</strong></a></td><td>🌐 Public</td><td>—</td><td>Generate beautiful QRCode with help of ComfyUI</td></tr>
+        <tr><td><a href="https://github.com/LungWai/qrgen"><strong>qrgen</strong></a></td><td>🌐 Public</td><td><a href="https://qrgen.sw128lab.xyz">site</a></td><td>Generate beautiful QRCode with help of ComfyUI</td></tr>
         <tr><td><a href="https://github.com/LungWai/EarningFast"><strong>EarningFast</strong></a></td><td>🌐 Public</td><td>—</td><td>Auto-pipeline getting earning reports and schedule from us stocks</td></tr>
         <tr><td><a href="https://github.com/LungWai/outputCursorExtensionv2"><strong>outputCursorExtensionv2</strong></a></td><td>🌐 Public</td><td>—</td><td>Extension for vibe coding IDE Cursor, on LLM response management</td></tr>
         <!-- GENERATED: SAAS_COMPLETED END -->
@@ -63,7 +63,7 @@ Full‑stack developer building SaaS, dev tools, and ML experiments.
       </thead>
           <tbody>
       <!-- GENERATED: SAAS_IN_PROGRESS START (edit in LungWai/projects.json) -->
-        <tr><td><a href="https://github.com/LungWai/easystatement"><strong>easystatement</strong></a></td><td>🌐 Public</td><td>—</td><td>banking and E-statemnet management tools with leverage of visual LLM</td></tr>
+        <tr><td><a href="https://github.com/LungWai/easystatement"><strong>easystatement</strong></a></td><td>🌐 Public</td><td><a href="https://www.easy-statement.com">site</a></td><td>banking and E-statemnet management tools with leverage of visual LLM</td></tr>
         <tr><td><a href="https://github.com/LungWai/salary-estimator"><strong>salary-estimator</strong></a></td><td>🌐 Public</td><td>—</td><td>Salary estimator with use of llm reasoning</td></tr>
         <tr><td><a href="https://github.com/LungWai/mcp-notification-server"><strong>mcp-notification-server</strong></a></td><td>🌐 Public</td><td>—</td><td>MCP server that can help notify user with integration to social media</td></tr>
         <tr><td><a href="https://github.com/LungWai/winpreview"><strong>winpreview</strong></a></td><td>🌐 Public</td><td>—</td><td>Windows preview image app</td></tr>

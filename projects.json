@@ -13,7 +13,7 @@
         "year": "2024 Q4",
         "description": "An automated platform that streamlines repository creation and management on GitHub. The system handles branch configuration, workflow setup, and CI/CD pipeline initialization automatically.",
         "image": "/logos/github-builder.svg",
-        "preview_image": "https://picsum.photos/id/237/800/600",
+        "preview_image": "http://imgbed.sw128lab.xyz/file/1758010714978_chrome_N23L5bkmvt.png",
         "url": "https://github.com",
         "category": "Development Tools"
       }

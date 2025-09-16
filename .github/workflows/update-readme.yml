@@ -15,6 +15,9 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
+    env:
+      DEPENDENT_REPO: ${{ secrets.DEPENDENT_REPO }}
+      DISPATCH_TOKEN: ${{ secrets.DEPENDENT_REPO_PAT }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,46 +38,27 @@ jobs:
         run: |
           python generate_readme.py
 
-      - name: Sync Neon DB
-        if: ${{ secrets.NEON_DATABASE_URL != '' }}
-        env:
-          NEON_DATABASE_URL: ${{ secrets.NEON_DATABASE_URL }}
-          NEON_TABLE: ${{ secrets.NEON_TABLE }}
-        run: |
-          python sync_neon_db.py --strict
-
-      - name: Mirror to JSON (no DB configured)
-        if: ${{ secrets.NEON_DATABASE_URL == '' }}
-        run: |
-          python sync_neon_db.py
-
       - name: Commit changes
         if: ${{ always() && github.event_name == 'push' }}
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add readme.md db_products.json || true
-            git commit -m "chore: regenerate README and sync Neon (mirror if no DB)"
+            git add readme.md || true
+            git commit -m "chore: regenerate README"
             git push
           else
             echo "No changes to commit"
           fi
 
       - name: Notify dependent repo (optional)
-        if: ${{ success() && env.DEPENDENT_REPO != '' }}
+        if: ${{ success() && env.DEPENDENT_REPO != '' && env.DISPATCH_TOKEN != '' }}
         env:
-          DEPENDENT_REPO: ${{ secrets.DEPENDENT_REPO }}
-          DISPATCH_TOKEN: ${{ secrets.DEPENDENT_REPO_PAT }}
           SRC_REPO: ${{ github.repository }}
           SRC_REF: ${{ github.ref_name }}
         run: |
-          if [ -n "$DISPATCH_TOKEN" ] && [ -n "$DEPENDENT_REPO" ]; then
-            curl -sS -X POST \
-              -H "Authorization: token $DISPATCH_TOKEN" \
-              -H "Accept: application/vnd.github+json" \
-              https://api.github.com/repos/${DEPENDENT_REPO}/dispatches \
-              -d "{\"event_type\":\"projects_json_updated\",\"client_payload\":{\"source_repo\":\"${SRC_REPO}\",\"ref\":\"${SRC_REF}\"}}"
-          else
-            echo "Skipping repository_dispatch; secrets not configured."
-          fi 
+          curl -sS -X POST \
+            -H "Authorization: token $DISPATCH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${DEPENDENT_REPO}/dispatches \
+            -d "{\"event_type\":\"projects_json_updated\",\"client_payload\":{\"source_repo\":\"${SRC_REPO}\",\"ref\":\"${SRC_REF}\"}}" 

@@ -81,6 +81,7 @@ tr[data-details='db'] .details-panels .panel-desc{display:none}
     <div class="header-actions">
       <button id="theme-toggle" type="button" class="btn btn-ghost" title="Toggle theme">🌞/🌙</button>
       <button type="submit" form="editor-form" class="btn btn-primary" title="Save changes">Save changes</button>
+      <button type="submit" form="editor-form" formaction="{{ url_for('commit') }}" class="btn" title="Save, Commit & Sync Neon">Commit & Sync</button>
     </div>
   </div>
 </header>
@@ -209,6 +210,7 @@ tr[data-details='db'] .details-panels .panel-desc{display:none}
     <span class="small">Tip: Use the filters to quickly find rows. Toggle sections to focus.</span>
     <div class="actions">
       <a href="/" class="btn">Back</a>
+      <button type="submit" formaction="{{ url_for('commit') }}" class="btn">Commit & Sync</button>
       <button type="submit" class="btn btn-primary">Save & Regenerate README</button>
     </div>
   </div>
@@ -415,6 +417,82 @@ def save():
 
     return redirect(url_for("index"))
 
+
+def _git_commit_and_push() -> tuple[bool, str]:
+    import subprocess, os
+    try:
+        add = subprocess.run(["git", "-C", str(ROOT), "add", "-A"], capture_output=True, text=True)
+        if add.returncode != 0:
+            return False, (add.stderr.strip() or add.stdout.strip() or "git add failed")
+        commit = subprocess.run(["git", "-C", str(ROOT), "commit", "-m", "chore: update projects and docs via editor"], capture_output=True, text=True)
+        if commit.returncode != 0:
+            msg = (commit.stderr + commit.stdout).lower()
+            if "nothing to commit" in msg:
+                return True, "No changes to commit."
+            return False, (commit.stderr.strip() or commit.stdout.strip() or "git commit failed")
+        branch_proc = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "--abbrev-ref", "HEAD"], capture_output=True, text=True)
+        branch = (branch_proc.stdout or "main").strip()
+        push = subprocess.run(["git", "-C", str(ROOT), "push", "origin", branch], capture_output=True, text=True)
+        if push.returncode != 0:
+            push2 = subprocess.run(["git", "-C", str(ROOT), "push"], capture_output=True, text=True)
+            if push2.returncode != 0:
+                return False, (push.stderr.strip() or push.stdout.strip() or "git push failed")
+        return True, "Committed and pushed."
+    except Exception as exc:
+        return False, str(exc)
+
+@app.post("/commit")
+def commit():
+    raw = request.form.to_dict(flat=False)
+    grouped: dict[str, dict[str, dict[str, Any]]] = {}
+    import re as _re
+    key_pattern = _re.compile(r"([^\[]+)\[([^\]]+)\](?:\[([^\]]+)\](?:\[([^\]]+)\])?)?")
+    for full_key, values in raw.items():
+        value = values[-1] if values else ""
+        m = key_pattern.fullmatch(full_key)
+        if not m:
+            continue
+        section, idx, field, subfield = m.groups()
+        bucket = grouped.setdefault(section, {}).setdefault(idx, {})
+        if subfield:
+            bucket.setdefault(field, {})[subfield] = value
+        else:
+            bucket[field] = value
+
+    data: dict[str, list[dict[str, Any]]] = {}
+    for section, rows in grouped.items():
+        data[section] = normalize(rows)
+
+    try:
+        original = load_data()
+        for k, v in original.items():
+            if not isinstance(v, list):
+                data[k] = v
+    except Exception:
+        pass
+
+    DATA.write_text(json.dumps(data, indent=2), encoding="utf-8")
+
+    try:
+        import generate_readme  # type: ignore
+        generate_readme.main()
+        flash("Saved and regenerated README.")
+    except Exception as exc:  # pragma: no cover
+        flash(f"Saved projects.json but failed to regenerate README: {exc}")
+
+    try:
+        import sync_neon_db  # type: ignore
+        if sync_neon_db.sync_from_env(strict=False):
+            flash("Neon DB sync attempted.")
+        else:
+            flash("Neon DB not configured; mirrored to JSON or CI will sync.")
+    except Exception as exc:  # pragma: no cover
+        flash(f"Neon DB sync error: {exc}")
+
+    ok, msg = _git_commit_and_push()
+    flash(msg)
+
+    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000, debug=True)

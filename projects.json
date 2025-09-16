@@ -10,10 +10,10 @@
       "db-attribute": {
         "id": "product-1",
         "title": "GitHub Builder",
-        "year": "2025 Q3",
+        "year": "2025 Q2",
         "description": "An automated platform that streamlines repository creation and management on GitHub. The system handles branch configuration, workflow setup, and CI/CD pipeline initialization automatically.",
         "image": "/logos/github-builder.svg",
-        "preview_image": "https://picsum.photos/id/237/800/600",
+        "preview_image": "http://imgbed.sw128lab.xyz/file/1758010433740_chrome_N23L5bkmvt.png",
         "url": "https://github.com",
         "category": "Development Tools"
       }

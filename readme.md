@@ -64,7 +64,7 @@ Full‑stack developer building SaaS, dev tools, and ML experiments.
           <tbody>
       <!-- GENERATED: SAAS_IN_PROGRESS START (edit in LungWai/projects.json) -->
         <tr><td><a href="https://github.com/LungWai/easystatement"><strong>easystatement</strong></a></td><td>🌐 Public</td><td>—</td><td>banking and E-statemnet management tools with leverage of visual LLM</td></tr>
-        <tr><td><a href="https://github.com/LungWai/salary-estimator"><strong>salary-estimator</strong></a></td><td>🌐 Public</td><td>—</td><td>Salary estimator with use of</td></tr>
+        <tr><td><a href="https://github.com/LungWai/salary-estimator"><strong>salary-estimator</strong></a></td><td>🌐 Public</td><td>—</td><td>Salary estimator with use of llm reasoning</td></tr>
         <tr><td><a href="https://github.com/LungWai/mcp-notification-server"><strong>mcp-notification-server</strong></a></td><td>🌐 Public</td><td>—</td><td>MCP server that can help notify user with integration to social media</td></tr>
         <tr><td><a href="https://github.com/LungWai/winpreview"><strong>winpreview</strong></a></td><td>🌐 Public</td><td>—</td><td>Windows preview image app</td></tr>
         <tr><td><a href="https://github.com/LungWai/trendSite2"><strong>trendSite2</strong></a></td><td>🌐 Public</td><td>—</td><td>Site for trending content</td></tr>
@@ -72,10 +72,10 @@ Full‑stack developer building SaaS, dev tools, and ML experiments.
         <tr><td><a href="https://github.com/LungWai/draw-and-guess"><strong>draw-and-guess</strong></a></td><td>🌐 Public</td><td>—</td><td>Draw-and-guess games for ios and android</td></tr>
         <tr><td><a href="https://github.com/LungWai/memecoinfast"><strong>memecoinfast</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
         <tr><td><a href="https://github.com/LungWai/sideView2"><strong>sideView2</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/personalprompt"><strong>personalprompt</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/personalprompt"><strong>personalprompt</strong></a></td><td>🌐 Public</td><td>—</td><td>Prompt manager for usage</td></tr>
         <tr><td><a href="https://github.com/LungWai/simple-licensing-module"><strong>simple-licensing-module</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
         <tr><td><a href="https://github.com/LungWai/project-bolt-flood-puzzle"><strong>project-bolt-flood-puzzle</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
-        <tr><td><a href="https://github.com/LungWai/project-bolt-aiImageDetector"><strong>project-bolt-aiImageDetector</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/project-bolt-aiImageDetector"><strong>project-bolt-aiImageDetector</strong></a></td><td>🌐 Public</td><td>—</td><td>AI generated image detection</td></tr>
         <tr><td><a href="https://github.com/LungWai/ChatAppTemplate"><strong>ChatAppTemplate</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
         <!-- GENERATED: SAAS_IN_PROGRESS END -->
     </tbody>

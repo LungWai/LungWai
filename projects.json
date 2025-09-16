@@ -10,7 +10,7 @@
       "db-attribute": {
         "id": "product-1",
         "title": "GitHub Builder",
-        "year": "2025 Q1",
+        "year": "2024 Q4",
         "description": "An automated platform that streamlines repository creation and management on GitHub. The system handles branch configuration, workflow setup, and CI/CD pipeline initialization automatically.",
         "image": "/logos/github-builder.svg",
         "preview_image": "https://picsum.photos/id/237/800/600",
@@ -103,7 +103,7 @@
       "repo": "https://github.com/LungWai/salary-estimator",
       "visibility": "public",
       "deploy": "None",
-      "desc": "Salary estimator with use of",
+      "desc": "Salary estimator with use of llm reasoning",
       "sync-with-db": false
     },
     {
@@ -167,7 +167,7 @@
       "repo": "https://github.com/LungWai/personalprompt",
       "visibility": "public",
       "deploy": "None",
-      "desc": "",
+      "desc": "Prompt manager for usage",
       "sync-with-db": false
     },
     {
@@ -191,7 +191,7 @@
       "repo": "https://github.com/LungWai/project-bolt-aiImageDetector",
       "visibility": "public",
       "deploy": "None",
-      "desc": "",
+      "desc": "AI generated image detection",
       "sync-with-db": false
     },
     {

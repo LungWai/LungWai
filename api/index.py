@@ -216,7 +216,7 @@ tr[data-details='db'] .details-panels .panel-desc{display:none}
                       <span>desc</span>
                     </label>
                     <label class="seg-item">
-                      <input type="radio" name="details-{{ key }}-{{ loop.index0 }}" value="db" {% if row.get('sync-with-db') %}checked{% endif %}>
+                      <input type="radio" name="details-{{ key }}-{{ loop.index0 }}" value="db" {% if row.get('sync-with-db') %}checked{% endif %} data-details-radio>
                       <span>db</span>
                     </label>
                   </div>
@@ -302,6 +302,16 @@ function toggleDbFieldsForRow(tr){
   tr.setAttribute('data-details', checked ? 'db' : 'desc');
 }
 
+function wireDbDetailsRadios(scope){
+  (scope || document).querySelectorAll('.details-switch [data-details-radio]').forEach(function(r){
+    r.addEventListener('change', function(){
+      var tr = r.closest('tr');
+      var cb = tr ? tr.querySelector("input[type='checkbox'][data-sync]") : null;
+      if(cb){ cb.checked = true; toggleDbFieldsForRow(tr); }
+    });
+  });
+}
+
 function wireSyncToggles(scope){
   (scope || document).querySelectorAll("input[type='checkbox'][data-sync]").forEach(function(cb){
     cb.addEventListener('change', function(){ var tr=cb.closest('tr'); if(tr) toggleDbFieldsForRow(tr); });
@@ -321,6 +331,7 @@ function wireDetailsSwitches(scope){
 // Initialize on load
 wireSyncToggles(document);
 wireDetailsSwitches(document);
+wireDbDetailsRadios(document);
 document.querySelectorAll('tbody tr').forEach(function(tr){ if(!tr.classList.contains('new-row')) toggleDbFieldsForRow(tr); });
 
 function addRow(section){
@@ -349,7 +360,7 @@ function addRow(section){
           <span>desc</span>\
         </label>\
         <label class=\"seg-item\">\
-          <input type=\"radio\" name=\"details-${section}-${uid}\" value=\"db\">\
+          <input type=\"radio\" name=\"details-${section}-${uid}\" value=\"db\" data-details-radio>\
           <span>db</span>\
         </label>\
       </div>
@@ -377,6 +388,7 @@ function addRow(section){
   tbody.appendChild(tr);
   wireSyncToggles(tr);
   wireDetailsSwitches(tr);
+  wireDbDetailsRadios(tr);
   toggleDbFieldsForRow(tr);
 }
 </script>
@@ -588,7 +600,14 @@ def save():
     commit_message = request.form.get("commit_message") or "Update projects.json"
     ok, code, err = github_upsert_file(TARGET_REMOTE_PATH, content_bytes, commit_message)
     if ok:
-        flash("Saved and committed projects.json. GitHub Actions will regenerate README.")
+        neon_msg = ""
+        try:
+            import sync_neon_db as neon_sync  # lazy import to keep cold start small
+            did_sync = neon_sync.sync_from_env(strict=True)
+            neon_msg = "Neon DB synced." if did_sync else "Neon DB sync skipped (missing secret)."
+        except Exception as exc:
+            neon_msg = f"Neon DB sync failed: {exc}"
+        flash(f"Saved and committed projects.json. {neon_msg}")
     else:
         flash(f"Commit failed ({code}): {err}")
 

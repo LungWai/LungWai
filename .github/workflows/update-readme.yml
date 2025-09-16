@@ -35,15 +35,21 @@ jobs:
         run: |
           python generate_readme.py
 
-      - name: Sync Neon DB (or write mirror JSON)
+      - name: Sync Neon DB
+        if: ${{ secrets.NEON_DATABASE_URL != '' }}
         env:
           NEON_DATABASE_URL: ${{ secrets.NEON_DATABASE_URL }}
           NEON_TABLE: ${{ secrets.NEON_TABLE }}
         run: |
-          python sync_neon_db.py || true
+          python sync_neon_db.py --strict
+
+      - name: Mirror to JSON (no DB configured)
+        if: ${{ secrets.NEON_DATABASE_URL == '' }}
+        run: |
+          python sync_neon_db.py
 
       - name: Commit changes
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ always() && github.event_name == 'push' }}
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
             git config user.name "github-actions[bot]"

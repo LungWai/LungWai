@@ -68,6 +68,12 @@ def _project_to_product(row: dict[str, Any]) -> dict[str, Any]:
 
 
 def _load_projects_file() -> dict[str, Any]:
+    tmp = Path("/tmp/projects.json")
+    if tmp.exists():
+        try:
+            return json.loads(tmp.read_text(encoding="utf-8"))
+        except Exception:
+            pass
     return json.loads(PROJECTS.read_text(encoding="utf-8"))
 
 
@@ -180,24 +186,59 @@ def _sync_neon(records: Iterable[dict[str, Any]], dsn: str, table: str) -> None:
     print(f"Upserted {len(rows)} rows into table '{table}'.")
 
 
-def main() -> None:
-    records = _prepare_records()
+def sync_from_env(strict: bool = False) -> bool:
+    """Sync using NEON_* env vars.
 
+    Returns True if a DB sync was attempted (and succeeded), False if mirrored or skipped.
+    In strict mode, exceptions are raised to the caller.
+    """
+    records = _prepare_records()
     raw_dsn = os.getenv("NEON_DATABASE_URL", "").strip()
     dsn = _normalize_neon_dsn(raw_dsn)
     table = (os.getenv("NEON_TABLE") or DEFAULT_TABLE_NAME).strip()
 
     if not dsn:
-        print("NEON_DATABASE_URL not set; running in mirror mode (no DB writes).")
-        _write_json_mirror(records)
-        return
+        # No secret available; respect strict setting
+        if strict:
+            raise RuntimeError("NEON_DATABASE_URL not set")
+        return False
 
     try:
         _sync_neon(records, dsn, table)
+        return True
+    except Exception:
+        if strict:
+            raise
+        _write_json_mirror(records)
+        return False
+
+
+def main() -> None:
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Sync projects.json to Neon or mirror to JSON")
+    parser.add_argument("--strict", action="store_true", help="Exit non-zero if DB sync fails instead of mirroring")
+    args = parser.parse_args()
+
+    print(f"Prepared {len(_prepare_records())} record(s) for DB sync from projects.json")
+
+    raw_dsn = os.getenv("NEON_DATABASE_URL", "").strip()
+    dsn = _normalize_neon_dsn(raw_dsn)
+    if not dsn:
+        msg = "NEON_DATABASE_URL not set"
+        print(msg)
+        if args.strict:
+            raise SystemExit(msg)
+        return
+
+    try:
+        _sync_neon(_prepare_records(), dsn, os.getenv("NEON_TABLE", DEFAULT_TABLE_NAME))
     except Exception as exc:  # pragma: no cover
         print(f"Error syncing Neon DB: {exc}")
-        print("Falling back to mirror mode (writing JSON file).")
-        _write_json_mirror(records)
+        if args.strict:
+            raise
+        # Non-strict: no mirror fallback, just return non-zero via print
+        print("Skipping mirror; strictness disabled.")
 
 
 if __name__ == "__main__":

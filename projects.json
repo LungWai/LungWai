@@ -87,7 +87,7 @@
       "desc": "Extension for vibe coding IDE Cursor, on LLM response management",
       "sync-with-db": true,
       "db-attribute": {
-        "id": "product-10",
+        "id": "product-9",
         "title": "outputCursorExtension",
         "year": "2026 Q1",
         "description": "Extension for vibe coding IDE Cursor, on LLM response management",
@@ -225,6 +225,8 @@
       "db-attribute": {
         "id": "product-9",
         "title": "Flood puzzle",
+        "year": "2025 Q4",
+        "description": "Tile flooding mini game",
         "image": "https://imgbed.sw128lab.xyz/file/1758106523743_flood_puzzle.png",
         "preview_image": "https://imgbed.sw128lab.xyz/file/1758106523743_flood_puzzle.png",
         "category": "Games"

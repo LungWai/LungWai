@@ -112,7 +112,7 @@
         "year": "2025 Q4",
         "description": "A modern solution for transforming traditional financial statements into interactive digital formats. The platform automatically extracts and categorizes financial data while maintaining compliance standards.",
         "image": "/logos/smart-estatement.svg",
-        "preview_image": "https://picsum.photos/id/240/800/600",
+        "preview_image": "https://imgbed.sw128lab.xyz/file/1758118302569_image.png",
         "url": "https://www.easy-statement.com",
         "category": "Business Tools"
       }
@@ -138,8 +138,7 @@
         "year": "2025 Q4",
         "description": "MCP server that can help notify user with integration to social media",
         "image": "/logos/smart-estatement.svg",
-        "preview_image": "https://picsum.photos/id/240/800/600",
-        "url": "https://www.easy-statement.com",
+        "preview_image": "https://imgbed.sw128lab.xyz/file/1758118692988_image.png",
         "category": "Business Tools"
       }
     },

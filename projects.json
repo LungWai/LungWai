@@ -36,10 +36,10 @@
       "db-attribute": {
         "id": "product-3",
         "title": "1000saas",
-        "year": "2025 Q1",
+        "year": "2025 Q2",
         "description": "A comprehensive platform that accelerates SaaS product development using AI-driven tools and templates. The system provides ready-to-use components and automated workflows to reduce development time.",
         "image": "/logos/1000saas-ai.svg",
-        "preview_image": "https://picsum.photos/id/239/800/600",
+        "preview_image": "https://imgbed.sw128lab.xyz/file/1758084128135_image.png",
         "url": "https://1000saas.xyz",
         "category": "Development Tools"
       }
@@ -67,8 +67,17 @@
       "repo": "https://github.com/LungWai/EarningFast",
       "visibility": "public",
       "deploy": "None",
-      "desc": "Auto-pipeline getting earning reports and schedule from us stocks",
-      "sync-with-db": false
+      "desc": "Auto-pipeline getting earning reports and schedule from us stocks, and related analysis and llm chatbot for q&a",
+      "sync-with-db": true,
+      "db-attribute": {
+        "id": "product-6",
+        "title": "EarningFast",
+        "year": "2025 Q4",
+        "description": "Auto-pipeline getting earning reports and schedule from us stocks, and related llm analysis",
+        "image": "https://imgbed.sw128lab.xyz/file/1758085713094_Gemini_Generated_Image_ea17ioea17ioea17.png",
+        "preview_image": "https://imgbed.sw128lab.xyz/file/1758085713094_Gemini_Generated_Image_ea17ioea17ioea17.png",
+        "category": "Business Tools"
+      }
     },
     {
       "name": "outputCursorExtensionv2",
@@ -130,7 +139,12 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "Windows preview image app",
-      "sync-with-db": false
+      "sync-with-db": true,
+      "db-attribute": {
+        "id": "product-7",
+        "title": "winpreview",
+        "year": "2025 Q4"
+      }
     },
     {
       "name": "trendSite2",
@@ -202,7 +216,10 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "AI generated image detection",
-      "sync-with-db": false
+      "sync-with-db": true,
+      "db-attribute": {
+        "id": "product-8"
+      }
     },
     {
       "name": "ChatAppTemplate",
@@ -340,8 +357,8 @@
       "name": "Love-letter",
       "repo": "https://github.com/LungWai/Love-letter",
       "visibility": "public",
-      "deploy": "None",
-      "desc": "",
+      "deploy": "www.5201413.fun",
+      "desc": "Confession letter template for every visitor to create",
       "sync-with-db": false
     },
     {

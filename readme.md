@@ -37,7 +37,7 @@ Full‑stack developer building SaaS, dev tools, and ML experiments.
         <tr><td><a href="https://github.com/LungWai/sw128lab"><strong>sw128lab</strong></a></td><td>🔒 Private</td><td><a href="https://www.sw128lab.xyz">site</a></td><td>Home page for detailed application foresee and promotion</td></tr>
         <tr><td><a href="https://github.com/LungWai/1000-saas"><strong>1000-saas</strong></a></td><td>🔒 Private</td><td><a href="https://www.1000saas.xyz">site</a></td><td>Centralized and steady traffic digital space for promotion of interesting saas</td></tr>
         <tr><td><a href="https://github.com/LungWai/qrgen"><strong>qrgen</strong></a></td><td>🌐 Public</td><td><a href="https://qrgen.sw128lab.xyz">site</a></td><td>Generate beautiful QRCode with help of ComfyUI</td></tr>
-        <tr><td><a href="https://github.com/LungWai/EarningFast"><strong>EarningFast</strong></a></td><td>🌐 Public</td><td>—</td><td>Auto-pipeline getting earning reports and schedule from us stocks</td></tr>
+        <tr><td><a href="https://github.com/LungWai/EarningFast"><strong>EarningFast</strong></a></td><td>🌐 Public</td><td>—</td><td>Auto-pipeline getting earning reports and schedule from us stocks, and related analysis and llm chatbot for q&a</td></tr>
         <tr><td><a href="https://github.com/LungWai/outputCursorExtensionv2"><strong>outputCursorExtensionv2</strong></a></td><td>🌐 Public</td><td>—</td><td>Extension for vibe coding IDE Cursor, on LLM response management</td></tr>
         <!-- GENERATED: SAAS_COMPLETED END -->
       </tbody>
@@ -143,7 +143,7 @@ Full‑stack developer building SaaS, dev tools, and ML experiments.
     </thead>
     <tbody>
       <!-- GENERATED: FUN_PROJECTS START (edit in LungWai/projects.json) -->
-        <tr><td><a href="https://github.com/LungWai/Love-letter"><strong>Love-letter</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
+        <tr><td><a href="https://github.com/LungWai/Love-letter"><strong>Love-letter</strong></a></td><td>🌐 Public</td><td><a href="https://www.5201413.fun">site</a></td><td>Confession letter template for every visitor to create</td></tr>
         <tr><td><a href="https://github.com/LungWai/vid-promptor"><strong>vid-promptor</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
         <tr><td><a href="https://github.com/LungWai/userscript2extension"><strong>userscript2extension</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>
         <tr><td><a href="https://github.com/LungWai/cloth-sell"><strong>cloth-sell</strong></a></td><td>🌐 Public</td><td>—</td><td>—</td></tr>

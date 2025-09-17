@@ -85,7 +85,13 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "Extension for vibe coding IDE Cursor, on LLM response management",
-      "sync-with-db": false
+      "sync-with-db": true,
+      "db-attribute": {
+        "id": "product-9",
+        "title": "outputCursorExtension",
+        "year": "2026 Q1",
+        "url": "www.a1widget.com"
+      }
     }
   ],
   "saas_in_progress": [
@@ -145,8 +151,8 @@
         "title": "winpreview",
         "year": "2025 Q4",
         "description": "Simplistic windows preview image app",
-        "image": "https://imgbed.sw128lab.xyz/file/1758084128135_image.png https://imgbed.sw128lab.xyz/file/1758085713094_Gemini_Generated_Image_ea17ioea17ioea17.png https://imgbed.sw128lab.xyz/file/1758088700336_image.png",
-        "preview_image": "https://imgbed.sw128lab.xyz/file/1758084128135_image.png https://imgbed.sw128lab.xyz/file/1758085713094_Gemini_Generated_Image_ea17ioea17ioea17.png https://imgbed.sw128lab.xyz/file/1758088700336_image.png",
+        "image": "https://imgbed.sw128lab.xyz/file/1758088700336_image.png",
+        "preview_image": "https://imgbed.sw128lab.xyz/file/1758088700336_image.png",
         "category": "Productivity Tool"
       }
     },
@@ -212,7 +218,11 @@
       "visibility": "public",
       "deploy": "None",
       "desc": "",
-      "sync-with-db": false
+      "sync-with-db": true,
+      "db-attribute": {
+        "id": "product-9",
+        "title": "Flood puzzle"
+      }
     },
     {
       "name": "project-bolt-aiImageDetector",
@@ -226,8 +236,8 @@
         "title": "ai Image Detector",
         "year": "2025 Q4",
         "description": "AI generated image detection using different methods",
-        "image": "https://imgbed.sw128lab.xyz/file/1758084128135_image.png https://imgbed.sw128lab.xyz/file/1758085713094_Gemini_Generated_Image_ea17ioea17ioea17.png https://imgbed.sw128lab.xyz/file/1758088700336_image.png",
-        "preview_image": "https://imgbed.sw128lab.xyz/file/1758084128135_image.png https://imgbed.sw128lab.xyz/file/1758085713094_Gemini_Generated_Image_ea17ioea17ioea17.png https://imgbed.sw128lab.xyz/file/1758088700336_image.png",
+        "image": "https://imgbed.sw128lab.xyz/file/1758089726105_wordmark_tight_aimage_detector.png",
+        "preview_image": "https://imgbed.sw128lab.xyz/file/1758089726105_wordmark_tight_aimage_detector.png",
         "category": "Business tools"
       }
     },

@@ -57,7 +57,7 @@
         "year": "2025 Q1",
         "description": "Generate beautiful QRCode with help of ComfyUI",
         "image": "/logos/qrcode-gen.svg",
-        "preview_image": "https://picsum.photos/id/238/800/600",
+        "preview_image": "https://imgbed.sw128lab.xyz/file/1758106527532_qrgen.png",
         "url": "https://qrgen.sw128lab.xyz",
         "category": "Business Tools"
       }
@@ -90,7 +90,11 @@
         "id": "product-9",
         "title": "outputCursorExtension",
         "year": "2026 Q1",
-        "url": "www.a1widget.com"
+        "description": "Extension for vibe coding IDE Cursor, on LLM response management",
+        "image": "https://imgbed.sw128lab.xyz/file/1758106528881_outputcursor.png",
+        "preview_image": "https://imgbed.sw128lab.xyz/file/1758106528881_outputcursor.png",
+        "url": "www.a1widget.com",
+        "category": "Productivity Tools"
       }
     }
   ],
@@ -221,7 +225,10 @@
       "sync-with-db": true,
       "db-attribute": {
         "id": "product-9",
-        "title": "Flood puzzle"
+        "title": "Flood puzzle",
+        "image": "https://imgbed.sw128lab.xyz/file/1758106523743_flood_puzzle.png",
+        "preview_image": "https://imgbed.sw128lab.xyz/file/1758106523743_flood_puzzle.png",
+        "category": "Games"
       }
     },
     {

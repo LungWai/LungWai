@@ -48,7 +48,7 @@
       "name": "qrgen",
       "repo": "https://github.com/LungWai/qrgen",
       "visibility": "public",
-      "deploy": "qrgen.sw128lab.xyz",
+      "deploy": "ai-qrcode.online",
       "desc": "Generate beautiful QRCode with help of ComfyUI",
       "sync-with-db": true,
       "db-attribute": {

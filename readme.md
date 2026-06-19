@@ -201,3 +201,15 @@ Full‑stack developer building SaaS, dev tools, and ML experiments.
     <li><a href="https://github.com/LungWai/telegram-analysis"><strong>telegram-analysis</strong></a> 🌐</li>
   </ul>
 </details>
+
+---
+
+## 🐍 Contribution Snake
+
+<div align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/LungWai/LungWai/output/github-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/LungWai/LungWai/output/github-snake.svg" />
+  <img alt="github-snake" src="https://raw.githubusercontent.com/LungWai/LungWai/output/github-snake-dark.svg" />
+</picture>
+</div>
